@@ -1,12 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 
 const AwardCard = () => {
   return (
     <View style={style.card}>
       <Image
-        source={require("../assets/images/quizes/html.png")}
+        source={require("../../assets/images/quizes/html.png")}
         style={style.image}
       />
       <Text style={style.text}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableNativeFeedback } from "react-native-gesture-handler";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 
 export interface Answer {
   id: any;

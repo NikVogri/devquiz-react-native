@@ -5,7 +5,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import * as React from "react";
 
-import HomeScreen from "../screens/Home";
 import ProfileScreen from "../screens/Profile";
 import AwardsScreen from "../screens/Awards";
 import { BottomTabParamList } from "../types";
@@ -21,7 +20,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="home"
+      initialRouteName="quizList"
       tabBarOptions={{
         style: style.navigation,
         showLabel: false,
@@ -41,8 +40,8 @@ export default function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name="home"
-        component={HomeNavigator}
+        name="quizList"
+        component={QuizNavigator}
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -87,16 +86,15 @@ function AwardsNavigator() {
   );
 }
 
-const Home = createStackNavigator();
+const QuizStackNav = createStackNavigator();
 
-function HomeNavigator() {
+function QuizNavigator() {
   return (
-    <Home.Navigator screenOptions={{ headerShown: false }}>
-      <Home.Screen name="Home" component={HomeScreen} />
-      <Home.Screen name="QuizList" component={QuizList} />
-      <Home.Screen name="QuizIntro" component={QuizIntro} />
-      <Home.Screen name="Quiz" component={Quiz} />
-    </Home.Navigator>
+    <QuizStackNav.Navigator screenOptions={{ headerShown: false }}>
+      <QuizStackNav.Screen name="QuizList" component={QuizList} />
+      <QuizStackNav.Screen name="QuizIntro" component={QuizIntro} />
+      <QuizStackNav.Screen name="Quiz" component={Quiz} />
+    </QuizStackNav.Navigator>
   );
 }
 

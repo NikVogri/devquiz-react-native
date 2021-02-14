@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import QuizCardCompletionBar from "./QuizCardCompletionBar";
 
 interface QuizCardProps {

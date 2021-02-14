@@ -3,7 +3,7 @@ import { Route, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import quizList from "../quiz/list";
-import StartQuizButton from "../components/StartQuizButton";
+import StartQuizButton from "../components/UI/StartQuizButton";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function QuizIntro({

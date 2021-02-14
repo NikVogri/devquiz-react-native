@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
-import AwardCard from "../components/AwardCard";
+import AwardCard from "../components/Awards/AwardCard";
 import Main from "../components/Layout/Main";
 
 export default function Awards() {

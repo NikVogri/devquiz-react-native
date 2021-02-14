@@ -1,8 +1,8 @@
 import React from "react";
 
 import { StyleSheet, View } from "react-native";
-import Colors from "../constants/Colors";
-import calculatePercentage from "../lib/calculatePercentage";
+import Colors from "../../constants/Colors";
+import calculatePercentage from "../../lib/calculatePercentage";
 interface QuizCompletionBarProps {
   completedQuestions: number;
   totalQuestions: number;

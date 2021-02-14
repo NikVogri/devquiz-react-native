@@ -2,9 +2,9 @@ import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import QuizCompleted from "../components/QuizCompleted";
-import QuizCompletionBar from "../components/QuizCompletionBar";
-import QuizStep from "../components/QuizStep";
+import QuizCompleted from "../components/Quiz/QuizCompleted";
+import QuizCompletionBar from "../components/Quiz/QuizCompletionBar";
+import QuizStep from "../components/Quiz/QuizStep";
 import Colors from "../constants/Colors";
 import quizList from "../quiz/list";
 

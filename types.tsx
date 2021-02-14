@@ -8,7 +8,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   awards: undefined;
-  home: undefined;
+  quizList: undefined;
   profile: undefined;
-  QuizIntro: undefined;
+  quizIntro: undefined;
 };

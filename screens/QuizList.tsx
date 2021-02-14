@@ -2,7 +2,7 @@ import { NavigationProp } from "@react-navigation/native";
 import * as React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Main from "../components/Layout/Main";
-import QuizCard from "../components/QuizCard";
+import QuizCard from "../components/Quiz/QuizCard";
 import Colors from "../constants/Colors";
 import quizList from "../quiz/list";
 

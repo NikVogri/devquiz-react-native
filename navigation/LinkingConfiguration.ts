@@ -11,9 +11,9 @@ export default {
               AwardsScreen: "awards",
             },
           },
-          Home: {
+          QuizList: {
             screens: {
-              HomeScreen: "home",
+              QuizListScreen: "QuizList",
             },
           },
           Profile: {

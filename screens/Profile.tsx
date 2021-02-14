@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Main from "../components/Layout/Main";
-import Button from "../components/Button";
+import Button from "../components/UI/Button";
 import Colors from "../constants/Colors";
 
 export default function Profile() {
