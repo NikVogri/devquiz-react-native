@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import QuizCardCompletionBar from "./QuizCardCompletionBar";
 
 interface QuizCardProps {
@@ -20,20 +21,21 @@ const QuizCard = ({
   navigation,
 }: QuizCardProps) => {
   return (
-    <View
-      style={style.card}
-      onTouchStart={() => navigation.navigate("QuizIntro", { id })}
-    >
-      {completedQuestions > 0 && (
-        <QuizCardCompletionBar
-          completedQuestions={completedQuestions}
-          totalQuestions={totalQuestions}
-        />
-      )}
-      <Image style={style.image} source={image} />
-      <View style={style.titleContainer}>
-        <Text style={style.title}>{title}</Text>
-      </View>
+    <View style={style.card}>
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate("QuizIntro", { id })}
+      >
+        {completedQuestions > 0 && (
+          <QuizCardCompletionBar
+            completedQuestions={completedQuestions}
+            totalQuestions={totalQuestions}
+          />
+        )}
+        <Image style={style.image} source={image} />
+        <View style={style.titleContainer}>
+          <Text style={style.title}>{title}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };

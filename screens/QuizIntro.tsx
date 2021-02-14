@@ -4,6 +4,7 @@ import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import quizList from "../quiz/list";
 import StartQuizButton from "../components/StartQuizButton";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function QuizIntro({
   navigation,
@@ -24,12 +25,14 @@ export default function QuizIntro({
 
   return (
     <View style={style.quiz}>
-      <View
-        style={style.back}
-        onTouchStart={() => navigation.navigate("QuizList")}
-      >
-        <Ionicons name="chevron-back" size={32} color="white" />
+      <View style={style.back}>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate("QuizList")}
+        >
+          <Ionicons name="chevron-back" size={32} color="white" />
+        </TouchableWithoutFeedback>
       </View>
+
       <Image source={quiz.image} style={style.image} />
 
       {/* Start quiz button */}
@@ -43,18 +46,18 @@ export default function QuizIntro({
 const style = StyleSheet.create({
   quiz: {
     backgroundColor: Colors.backgroundPrimary,
+    height: "100%",
   },
   back: {
-    height: "15%",
+    paddingLeft: 5,
+    height: "10%",
+    paddingBottom: 7,
     display: "flex",
-    justifyContent: "center",
-    paddingLeft: 10,
-    // width: "20%",
+    justifyContent: "flex-end",
     backgroundColor: Colors.backgroundDark,
-    zIndex: 99,
   },
   image: {
     width: "100%",
-    height: "50%",
+    height: 250,
   },
 });
