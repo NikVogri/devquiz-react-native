@@ -3,8 +3,102 @@ export default [
     id: 1,
     title: "CSS For Begginers",
     image: require("../assets/images/quizes/css.png"),
-    completedQuestions: 1,
-    totalQuestions: 10,
+    completedQuestions: 0,
+    totalQuestions: 4,
+    questionsAndAnswers: [
+      {
+        id: 1,
+        question: "Which of the following is not a CSS framework?",
+        type: "text",
+        answers: [
+          {
+            id: 1,
+            answer: "Bulma",
+            isCorrect: false,
+          },
+          {
+            id: 2,
+            answer: "Bootstrap",
+            isCorrect: false,
+          },
+          {
+            id: 3,
+            answer: "Vue",
+            isCorrect: true,
+          },
+        ],
+      },
+      {
+        id: 2,
+        question:
+          "Property 'color' is used to change the background color of a given element.",
+        type: "text",
+        answers: [
+          {
+            id: 1,
+            answer: "true",
+            isCorrect: false,
+          },
+          {
+            id: 2,
+            answer: "false, property color changes the color of text",
+            isCorrect: true,
+          },
+        ],
+      },
+      {
+        id: 3,
+        question:
+          "What is the difference between class selectors and id selectors?",
+        type: "text",
+        answers: [
+          {
+            id: 1,
+            answer:
+              "Class selector can be re-used on multiple elements while id selector should be only used on a single element",
+            isCorrect: true,
+          },
+          {
+            id: 2,
+            answer:
+              "There is no difference between class selector and id selector",
+            isCorrect: false,
+          },
+          {
+            id: 3,
+            answer:
+              "Class selector is used in CSS while id selector is used in Javascript",
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        id: 4,
+        question:
+          "What is the difference between 'visibility: hidden' and 'display: none'?",
+        type: "text",
+        answers: [
+          {
+            id: 1,
+            answer:
+              "There is no difference between visibility: hidden and display: none.",
+            isCorrect: false,
+          },
+          {
+            id: 2,
+            answer:
+              "visibility: hidden hides the element, but it occupies the space, while display: none does not.",
+            isCorrect: true,
+          },
+          {
+            id: 3,
+            answer:
+              "display: none removes the element from the DOM, while visibility: hidden does not.",
+            isCorrect: false,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 2,
