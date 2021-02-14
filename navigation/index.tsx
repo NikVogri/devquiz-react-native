@@ -33,9 +33,6 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Screen name="QuizList" component={QuizList} />
-      <Stack.Screen name="QuizIntro" component={QuizIntro} />
-      <Stack.Screen name="Quiz" component={Quiz} />
     </Stack.Navigator>
   );
 }

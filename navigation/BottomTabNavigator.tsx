@@ -10,6 +10,9 @@ import ProfileScreen from "../screens/Profile";
 import AwardsScreen from "../screens/Awards";
 import { BottomTabParamList } from "../types";
 import { StyleSheet } from "react-native";
+import Quiz from "../screens/Quiz";
+import QuizIntro from "../screens/QuizIntro";
+import QuizList from "../screens/QuizList";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -88,6 +91,9 @@ function HomeNavigator() {
   return (
     <Home.Navigator screenOptions={{ headerShown: false }}>
       <Home.Screen name="Home" component={HomeScreen} />
+      <Home.Screen name="QuizList" component={QuizList} />
+      <Home.Screen name="QuizIntro" component={QuizIntro} />
+      <Home.Screen name="Quiz" component={Quiz} />
     </Home.Navigator>
   );
 }
