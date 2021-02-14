@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, StyleSheet, Text, View, Image } from "react-native";
+import { Route, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import quizList from "../quiz/list";
@@ -32,20 +32,24 @@ export default function QuizIntro({
           <Ionicons name="chevron-back" size={32} color="white" />
         </TouchableWithoutFeedback>
       </View>
-
       <Image source={quiz.image} style={style.image} />
-
-      {/* Start quiz button */}
-      <StartQuizButton
-        startQuiz={() => navigation.navigate("Quiz", { id: quiz.id })}
-      />
+      <View style={style.info}>
+        <Text style={style.title}>{quiz.title}</Text>
+        <Text style={style.description}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed commodi
+          eligendi modi quis quia odit assumenda cupiditate itaque.
+        </Text>
+        <StartQuizButton
+          startQuiz={() => navigation.navigate("Quiz", { id: quiz.id })}
+        />
+      </View>
     </View>
   );
 }
 
 const style = StyleSheet.create({
   quiz: {
-    backgroundColor: Colors.backgroundPrimary,
+    backgroundColor: Colors.backgroundDark,
     height: "100%",
   },
   back: {
@@ -58,6 +62,29 @@ const style = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 250,
+    height: 200,
+  },
+  info: {
+    padding: 20,
+    height: Dimensions.get("window").height - 305,
+  },
+  title: {
+    textAlign: "left",
+    color: Colors.white,
+    fontWeight: "700",
+    fontSize: 32,
+    marginBottom: 10,
+  },
+  description: {
+    fontSize: 18,
+    color: Colors.white,
+    lineHeight: 25,
+    marginBottom: 20,
+  },
+  additional: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: Colors.white,
+    lineHeight: 25,
   },
 });
