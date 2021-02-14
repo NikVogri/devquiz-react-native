@@ -34,7 +34,9 @@ export default function Quiz({
   return (
     <View style={style.quiz}>
       <View style={style.close}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate("QuizList")}
+        >
           <AntDesign name="close" size={24} color="white" />
         </TouchableWithoutFeedback>
       </View>
