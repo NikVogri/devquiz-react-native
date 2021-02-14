@@ -3,6 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
+import Quiz from "../screens/Quiz";
+import QuizIntro from "../screens/QuizIntro";
+import QuizList from "../screens/QuizList";
 import { RootStackParamList } from "../types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -30,6 +33,9 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
+      <Stack.Screen name="QuizList" component={QuizList} />
+      <Stack.Screen name="QuizIntro" component={QuizIntro} />
+      <Stack.Screen name="Quiz" component={Quiz} />
     </Stack.Navigator>
   );
 }

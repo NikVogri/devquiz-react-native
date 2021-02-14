@@ -34,7 +34,7 @@ export default function QuizIntro({
 
       {/* Start quiz button */}
       <StartQuizButton
-        startQuiz={navigation.navigate("Quiz", { id: quiz.id })}
+        startQuiz={() => navigation.navigate("Quiz", { id: quiz.id })}
       />
     </View>
   );

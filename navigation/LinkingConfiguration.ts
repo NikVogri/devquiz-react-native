@@ -22,6 +22,16 @@ export default {
             },
           },
         },
+        QuizIntro: {
+          screens: {
+            QuizIntroScreen: "QuizIntro",
+          },
+        },
+        Quiz: {
+          screens: {
+            QuizScreen: "Quiz",
+          },
+        },
       },
       NotFound: "*",
     },
