@@ -4,10 +4,10 @@ import Colors from "../constants/Colors";
 
 interface QuizQuestionProps {
   question: string;
-  type: "code" | "text";
+  questionType: "code" | "text";
 }
 
-const QuizQuestion = ({ question, type }: QuizQuestionProps) => {
+const QuizQuestion = ({ question, questionType }: QuizQuestionProps) => {
   return (
     <View style={style.question}>
       <Text style={style.text}>{question}</Text>
