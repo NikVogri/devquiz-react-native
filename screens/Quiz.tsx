@@ -2,9 +2,9 @@ import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import QuizAnswers from "../components/QuizAnswers";
+import QuizCompleted from "../components/QuizCompleted";
 import QuizCompletionBar from "../components/QuizCompletionBar";
-import QuizQuestion from "../components/QuizQuestion";
+import QuizStep from "../components/QuizStep";
 import Colors from "../constants/Colors";
 import quizList from "../quiz/list";
 
@@ -17,7 +17,7 @@ export default function Quiz({
 }) {
   const [step, setStep] = useState(1);
   const quiz = quizList.find((quiz) => quiz.id === route.params.id);
-  const { questionsAndAnswers } = quiz!;
+  const { questionsAndAnswers, totalQuestions } = quiz!;
 
   if (!quiz || !questionsAndAnswers) {
     return (
@@ -31,14 +31,6 @@ export default function Quiz({
     setStep((oldStepCount) => oldStepCount + 1);
   };
 
-  if (step > quiz.totalQuestions) {
-    return (
-      <View>
-        <Text>Completed</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={style.quiz}>
       <View style={style.close}>
@@ -48,20 +40,23 @@ export default function Quiz({
       </View>
       <View>
         <QuizCompletionBar
-          completedQuestions={step}
-          totalQuestions={quiz.totalQuestions}
+          completedQuestions={step > totalQuestions ? step - 1 : step}
+          totalQuestions={totalQuestions}
         />
       </View>
-      <View>
-        <QuizQuestion
-          question={questionsAndAnswers[step - 1].question}
-          type={questionsAndAnswers[step - 1].type as "text" | "code"}
-        />
-        <QuizAnswers
+      {step <= quiz.totalQuestions && (
+        <QuizStep
           answers={questionsAndAnswers[step - 1].answers}
           nextStep={handleNextStep}
+          question={questionsAndAnswers[step - 1].question}
+          questionType={
+            questionsAndAnswers[step - 1].questionType as "text" | "code"
+          }
         />
-      </View>
+      )}
+      {step > quiz.totalQuestions && (
+        <QuizCompleted totalQuestions={totalQuestions} correctAnswers={4} />
+      )}
     </View>
   );
 }

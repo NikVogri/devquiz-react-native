@@ -2,7 +2,7 @@ import React from "react";
 
 import { StyleSheet, View } from "react-native";
 import Colors from "../constants/Colors";
-
+import calculatePercentage from "../lib/calculatePercentage";
 interface QuizCompletionBarProps {
   completedQuestions: number;
   totalQuestions: number;
@@ -13,8 +13,9 @@ const QuizCompletionBar = ({
   totalQuestions,
 }: QuizCompletionBarProps) => {
   let barColor;
-  const completionPercentage = Math.floor(
-    (completedQuestions / totalQuestions) * 100
+  const completionPercentage = calculatePercentage(
+    completedQuestions,
+    totalQuestions
   );
 
   if (completionPercentage === 0) {
