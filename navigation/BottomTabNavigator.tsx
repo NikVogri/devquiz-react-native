@@ -14,6 +14,8 @@ import Quiz from "../screens/Quiz";
 import QuizIntro from "../screens/QuizIntro";
 import QuizList from "../screens/QuizList";
 
+import Colors from "../constants/Colors";
+
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
@@ -68,8 +70,8 @@ export default function BottomTabNavigator() {
 
 const style = StyleSheet.create({
   navigation: {
-    backgroundColor: "#4F4F4F",
-    borderTopColor: "#4F4F4F",
+    backgroundColor: Colors.NavbarPrimary,
+    borderTopColor: Colors.borderPrimary,
   },
 });
 

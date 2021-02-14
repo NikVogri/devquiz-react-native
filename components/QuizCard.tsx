@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import Colors from "../constants/Colors";
 import QuizCardCompletionBar from "./QuizCardCompletionBar";
 
 interface QuizCardProps {
@@ -42,16 +43,13 @@ const QuizCard = ({
 
 const style = StyleSheet.create({
   card: {
-    backgroundColor: "#333333",
+    backgroundColor: Colors.backgroundPrimary,
     borderRadius: 10,
     width: "43%",
     // maxHeight: 180,
     margin: 10,
-    shadowColor: "#000",
-    shadowOffset: { height: 5, width: 0 },
-    shadowRadius: 5,
-    shadowOpacity: 0.1,
     position: "relative",
+    ...Colors.shadow,
   },
   image: {
     width: "100%",
@@ -65,7 +63,7 @@ const style = StyleSheet.create({
   },
   title: {
     width: "100%",
-    color: "#fff",
+    color: Colors.white,
     textAlign: "center",
   },
 });

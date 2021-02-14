@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Main from "../components/Layout/Main";
-
 import Button from "../components/Button";
+import Colors from "../constants/Colors";
 
 export default function Profile() {
   return (
@@ -29,6 +29,6 @@ const style = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#5A5A5A",
+    backgroundColor: Colors.backgroundDark,
   },
 });

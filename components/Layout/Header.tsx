@@ -22,19 +22,18 @@ const Header = () => {
 };
 const style = StyleSheet.create({
   header: {
-    backgroundColor: "#333333",
+    backgroundColor: Colors.backgroundDark,
+    borderBottomColor: Colors.borderPrimary,
+    borderBottomWidth: 1,
     height: 175,
     width: "100%",
-    shadowColor: Colors.black,
-    shadowOffset: { height: 5, width: 0 },
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
     zIndex: 99,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 30,
     paddingRight: 30,
+    ...Colors.shadow,
   },
   left: {
     display: "flex",

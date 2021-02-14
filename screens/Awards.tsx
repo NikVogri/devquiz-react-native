@@ -1,6 +1,7 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import Colors from "../constants/Colors";
 import AwardCard from "../components/AwardCard";
 import Main from "../components/Layout/Main";
 
@@ -31,6 +32,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    backgroundColor: "#5A5A5A",
+    backgroundColor: Colors.backgroundDark,
   },
 });

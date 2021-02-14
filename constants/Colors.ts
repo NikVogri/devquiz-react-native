@@ -1,8 +1,7 @@
 export default {
-  backgroundPrimary: "#5A5A5A",
-  backgroundDark: "#333333",
-  navigationBar: "#4F4F4F",
-  navigationItemActive: "#333333",
+  backgroundPrimary: "#333333",
+  backgroundDark: "#1E1E1E",
+  navigationBar: "#333333",
   white: "#ffff",
   black: "#0000",
   completionBarBackground: "#E0E0E0",
@@ -10,4 +9,12 @@ export default {
   mediumCompletionBackground: "#F2C94C",
   completedBackground: "#27AE60",
   primaryButton: "#27AE60",
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: { height: 5, width: 0 },
+    shadowRadius: 5,
+    shadowOpacity: 0.25,
+  },
+  NavbarPrimary: "#1C1B1B",
+  borderPrimary: "#333333",
 };

@@ -3,6 +3,7 @@ import * as React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Main from "../components/Layout/Main";
 import QuizCard from "../components/QuizCard";
+import Colors from "../constants/Colors";
 import quizList from "../quiz/list";
 
 export default function QuizList({ navigation }: { navigation: any }) {
@@ -32,6 +33,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    backgroundColor: "#5A5A5A",
+    backgroundColor: Colors.backgroundDark,
   },
 });
