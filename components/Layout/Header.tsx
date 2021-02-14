@@ -1,3 +1,4 @@
+import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Colors from "../../constants/Colors";
@@ -13,10 +14,6 @@ const Header = () => {
         <Text style={style.username}>Unknown Player</Text>
         <Text style={style.level}>Level 1</Text>
       </View>
-      <View style={style.right}>
-        <Text style={style.achievement}>46 quizes finished</Text>
-        <Text style={style.achievement}>46 quizes finished</Text>
-      </View>
     </View>
   );
 };
@@ -30,7 +27,8 @@ const style = StyleSheet.create({
     zIndex: 99,
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 20,
     paddingLeft: 30,
     paddingRight: 30,
     ...Colors.shadow,
