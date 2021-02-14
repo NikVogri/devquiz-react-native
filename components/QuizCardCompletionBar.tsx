@@ -54,10 +54,10 @@ const style = StyleSheet.create({
     position: "absolute",
     top: 0,
     zIndex: 99,
+    overflow: "hidden",
   },
   completeBar: {
     borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
     minWidth: 40,
   },
   text: {
