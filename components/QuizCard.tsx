@@ -46,6 +46,7 @@ const style = StyleSheet.create({
     backgroundColor: Colors.backgroundPrimary,
     borderRadius: 10,
     width: "43%",
+
     // maxHeight: 180,
     margin: 10,
     position: "relative",
@@ -53,6 +54,7 @@ const style = StyleSheet.create({
   },
   image: {
     width: "100%",
+    height: 125,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
