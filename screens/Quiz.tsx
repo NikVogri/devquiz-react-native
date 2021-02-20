@@ -22,7 +22,6 @@ export default function Quiz({
   useEffect(() => {
     const quizId = route.params.id;
     if (quizId) {
-      console.log(quizId);
       findQuiz(quizId);
     }
   }, [route.params.id]);

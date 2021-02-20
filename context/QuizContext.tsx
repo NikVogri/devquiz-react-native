@@ -123,8 +123,6 @@ export const QuizProvider = ({ children }: any) => {
     setStep(nextStep);
   };
 
-  console.log(correctAnswers, wrongAnswers, step);
-
   return (
     <QuizContext.Provider
       value={{
