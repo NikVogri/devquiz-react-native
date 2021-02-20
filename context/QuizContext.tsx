@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
 import quizList from "../quiz/list";
 
 export enum QuestionType {
@@ -40,7 +41,6 @@ interface QuizContextInterface {
   quizIsFinished: boolean;
   correctAnswers: number;
   wrongAnswers: number;
-  currentQandA: QuestionsAndAnswers;
 }
 const QuizContext = createContext<QuizContextInterface>({
   quiz: {
@@ -54,72 +54,78 @@ const QuizContext = createContext<QuizContextInterface>({
   step: 0,
   correctAnswers: 0,
   wrongAnswers: 0,
-  currentQandA: {
-    answers: [],
-    id: 0,
-    question: "",
-    questionType: QuestionType.text,
-  },
   quizIsFinished: false,
   handleAnswer: () => {},
   findQuiz: () => {},
 });
 
 export const QuizProvider = ({ children }: any) => {
+  const { storeData, getData } = useAsyncLocalStorage();
+
   const [step, setStep] = useState(1);
   const [quiz, setQuiz] = useState<any | null>(null);
 
-  const [currentQandA, setCurrentQandA] = useState<QuestionsAndAnswers>({
-    answers: [],
-    id: 0,
-    question: "",
-    questionType: QuestionType.text,
-  });
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState(0);
 
   const [quizIsFinished, setQuizIsFinished] = useState(false);
 
-  const findQuiz = (quizId: number) => {
+  const findQuiz = async (quizId: number) => {
     const foundQuiz = quizList.find((quiz) => quiz.id === quizId);
-    setQuizIsFinished(false);
 
-    if (foundQuiz && foundQuiz.questionsAndAnswers) {
+    if (foundQuiz) {
       setQuiz(foundQuiz);
-      setCurrentQandA(foundQuiz.questionsAndAnswers[0] as any);
-      setStep(0);
-      setCorrectAnswers(0);
-      setWrongAnswers(0);
+      if (foundQuiz.questionsAndAnswers) {
+        const localQuizData = await getData(`quiz-${foundQuiz.id}`);
+        if (localQuizData) {
+          setStep(localQuizData.lastCompletedStep);
+          setCorrectAnswers(localQuizData.correctAnswers);
+          setWrongAnswers(localQuizData.wrongAnswers);
+          setQuizIsFinished(
+            localQuizData.lastCompletedStep === foundQuiz.totalQuestions
+          );
+        } else {
+          setStep(0);
+          setCorrectAnswers(0);
+          setWrongAnswers(0);
+          setQuizIsFinished(false);
+        }
+      }
     } else {
-      setQuiz(null);
-      setCurrentQandA({
-        answers: [],
-        id: 0,
-        question: "",
-        questionType: QuestionType.text,
-      });
+      setQuizIsFinished(false);
+      setStep(0);
     }
   };
 
-  const handleAnswer = (answerId: number) => {
-    const answer = currentQandA.answers.find(
+  const handleAnswer = async (answerId: number) => {
+    const answer = quiz.questionsAndAnswers[step].answers.find(
       (answer: Answer) => answer.id === answerId
     );
 
     if (answer?.isCorrect) {
       setCorrectAnswers((prevCorrectCount: number) => prevCorrectCount + 1);
+      await storeData(`quiz-${quiz.id}`, {
+        quizId: quiz.id,
+        lastCompletedStep: step + 1,
+        correctAnswers: correctAnswers + 1,
+        wrongAnswers: wrongAnswers,
+      });
     } else {
       setWrongAnswers((prevWrongCount: number) => prevWrongCount + 1);
+      await storeData(`quiz-${quiz.id}`, {
+        quizId: quiz.id,
+        lastCompletedStep: step + 1,
+        correctAnswers: correctAnswers,
+        wrongAnswers: wrongAnswers + 1,
+      });
     }
 
     const nextStep = step + 1;
 
     if (nextStep === quiz.totalQuestions) {
-      setStep(nextStep);
       return setQuizIsFinished(true);
     }
 
-    setCurrentQandA(quiz.questionsAndAnswers[nextStep]);
     setStep(nextStep);
   };
 
@@ -128,7 +134,6 @@ export const QuizProvider = ({ children }: any) => {
       value={{
         handleAnswer,
         wrongAnswers,
-        currentQandA,
         findQuiz,
         quiz,
         correctAnswers,
