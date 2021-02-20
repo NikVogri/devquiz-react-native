@@ -33,12 +33,7 @@ export default function Quiz({ navigation }: { navigation: any; route: any }) {
         <QuizCompletionBar />
       </View>
       {!quizIsFinished && <QuizStep />}
-      {quizIsFinished && (
-        <QuizCompleted
-          totalQuestions={quiz.totalQuestions}
-          correctAnswers={correctAnswers}
-        />
-      )}
+      {quizIsFinished && <QuizCompleted navigation={navigation} />}
     </View>
   );
 }

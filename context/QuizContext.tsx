@@ -36,6 +36,7 @@ export interface Quiz {
 interface QuizContextInterface {
   handleAnswer: (answerId: number) => void;
   findQuiz: (quizId: number) => void;
+  restartQuiz: () => Promise<void>;
   quiz: Quiz;
   step: number;
   quizIsFinished: boolean;
@@ -57,10 +58,11 @@ const QuizContext = createContext<QuizContextInterface>({
   quizIsFinished: false,
   handleAnswer: () => {},
   findQuiz: () => {},
+  restartQuiz: async () => {},
 });
 
 export const QuizProvider = ({ children }: any) => {
-  const { storeData, getData } = useAsyncLocalStorage();
+  const { storeData, getData, removeData } = useAsyncLocalStorage();
 
   const [step, setStep] = useState(1);
   const [quiz, setQuiz] = useState<any | null>(null);
@@ -140,6 +142,18 @@ export const QuizProvider = ({ children }: any) => {
     setStep(nextStep);
   };
 
+  const restartQuiz = async () => {
+    try {
+      setStep(0);
+      setCorrectAnswers(0);
+      setWrongAnswers(0);
+      setQuizIsFinished(false);
+      return await removeData(`quiz-${quiz.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <QuizContext.Provider
       value={{
@@ -149,6 +163,7 @@ export const QuizProvider = ({ children }: any) => {
         quiz,
         correctAnswers,
         quizIsFinished,
+        restartQuiz,
         step,
       }}
     >

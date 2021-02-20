@@ -1,19 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
+import QuizContext from "../../context/QuizContext";
 import calculatePercentage from "../../lib/calculatePercentage";
 
-interface QuizCompleteProps {
-  correctAnswers: number;
-  totalQuestions: number;
-}
+const QuizComplete = ({ navigation }: { navigation: any }) => {
+  const { correctAnswers, quiz, restartQuiz } = useContext(QuizContext);
 
-const QuizComplete = ({
-  correctAnswers,
-  totalQuestions,
-}: QuizCompleteProps) => {
   const correctAnswersPercentage = calculatePercentage(
-    totalQuestions,
+    quiz.totalQuestions,
     correctAnswers
   );
 
@@ -28,13 +24,24 @@ const QuizComplete = ({
     resultMessage = "You're a natural!";
   }
 
+  const handleTryAgain = async () => {
+    await restartQuiz();
+    navigation.navigate("QuizIntro", { id: quiz.id });
+  };
+
   return (
     <View style={style.result}>
       <Text style={style.title}>Results:</Text>
       <Text style={style.percentage}>{correctAnswersPercentage} %</Text>
       <Text style={style.message}>{resultMessage}</Text>
-      {correctAnswersPercentage === 100 && <Text>Mark Completed</Text>}
-      {correctAnswersPercentage < 100 && <Text>Try Again</Text>}
+      {correctAnswersPercentage < 100 && (
+        <TouchableWithoutFeedback
+          containerStyle={style.button}
+          onPress={handleTryAgain}
+        >
+          <Text style={style.text}>Try Again</Text>
+        </TouchableWithoutFeedback>
+      )}
     </View>
   );
 };
@@ -54,14 +61,27 @@ const style = StyleSheet.create({
   },
   percentage: {
     fontSize: 64,
-    marginBottom: 25,
+    marginBottom: 50,
     color: Colors.white,
     fontWeight: "700",
   },
   message: {
     fontSize: 32,
-    marginBottom: 55,
+    marginBottom: 100,
     color: Colors.white,
+  },
+  button: {
+    backgroundColor: Colors.primaryButton,
+    borderRadius: 10,
+    paddingVertical: 15,
+    width: "100%",
+    ...Colors.shadow,
+  },
+  text: {
+    color: Colors.white,
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "400",
   },
 });
 
