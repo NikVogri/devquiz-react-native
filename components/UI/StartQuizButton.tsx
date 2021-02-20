@@ -5,14 +5,19 @@ import Colors from "../../constants/Colors";
 
 interface StartQuizButtonProps {
   startQuiz: () => void;
+  isStarted: boolean;
   [object: string]: any;
 }
 
-const StartQuizButton = ({ startQuiz, ...props }: StartQuizButtonProps) => {
+const StartQuizButton = ({
+  startQuiz,
+  isStarted,
+  ...props
+}: StartQuizButtonProps) => {
   return (
     <TouchableWithoutFeedback onPress={startQuiz}>
       <View onTouchStart={startQuiz} {...props} style={style.button}>
-        <Text style={style.text}>Start Quiz</Text>
+        <Text style={style.text}>{isStarted ? "Continue" : "Start Quiz"}</Text>
       </View>
     </TouchableWithoutFeedback>
   );

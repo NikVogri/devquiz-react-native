@@ -6,6 +6,7 @@ import StartQuizButton from "../components/UI/StartQuizButton";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import QuizContext from "../context/QuizContext";
 import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
+import QuizComplete from "../components/Quiz/QuizCompleted";
 
 export default function QuizIntro({
   navigation,
@@ -14,7 +15,7 @@ export default function QuizIntro({
   navigation: any;
   route: Route;
 }) {
-  const { quiz, findQuiz } = useContext(QuizContext);
+  const { quiz, findQuiz, quizIsFinished } = useContext(QuizContext);
   const { removeData } = useAsyncLocalStorage();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export default function QuizIntro({
           eligendi modi quis quia odit assumenda cupiditate itaque.
         </Text>
         <StartQuizButton
+          isStarted={quiz.completedQuestions > 0}
           startQuiz={() => navigation.navigate("Quiz", { id: quiz!.id })}
         />
       </View>
