@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import quizList from "../quiz/list";
 import StartQuizButton from "../components/UI/StartQuizButton";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import QuizContext from "../context/QuizContext";
+import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
 
 export default function QuizIntro({
   navigation,
@@ -13,7 +14,16 @@ export default function QuizIntro({
   navigation: any;
   route: Route;
 }) {
-  const quiz = quizList.find((quiz) => quiz.id === route.params.id);
+  const { quiz, findQuiz } = useContext(QuizContext);
+  const { removeData } = useAsyncLocalStorage();
+
+  useEffect(() => {
+    const quizId = route.params.id;
+    // removeData(`quiz-${quizId}`); // placeholder
+    if (quizId) {
+      findQuiz(quizId);
+    }
+  }, [route.params.id]);
 
   if (!quiz) {
     return (
@@ -40,7 +50,7 @@ export default function QuizIntro({
           eligendi modi quis quia odit assumenda cupiditate itaque.
         </Text>
         <StartQuizButton
-          startQuiz={() => navigation.navigate("Quiz", { id: quiz.id })}
+          startQuiz={() => navigation.navigate("Quiz", { id: quiz!.id })}
         />
       </View>
     </View>
