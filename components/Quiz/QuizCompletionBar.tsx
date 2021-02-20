@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
+import QuizContext from "../../context/QuizContext";
 import calculatePercentage from "../../lib/calculatePercentage";
-interface QuizCompletionBarProps {
-  completedQuestions: number;
-  totalQuestions: number;
-}
 
-const QuizCompletionBar = ({
-  completedQuestions,
-  totalQuestions,
-}: QuizCompletionBarProps) => {
+const QuizCompletionBar = () => {
+  const { wrongAnswers, correctAnswers, quiz, quizIsFinished } = useContext(
+    QuizContext
+  );
   let barColor;
+
+  const totalAnswers = wrongAnswers + correctAnswers;
   const completionPercentage = calculatePercentage(
-    completedQuestions,
-    totalQuestions
+    quiz.totalQuestions,
+    totalAnswers
   );
 
   if (completionPercentage === 0) {
@@ -24,7 +23,7 @@ const QuizCompletionBar = ({
     barColor = Colors.mediumCompletionBackground;
   } else if (completionPercentage < 50 && completionPercentage > 0) {
     barColor = Colors.lowCompletionBackground;
-  } else if (completionPercentage === 100) {
+  } else if (quizIsFinished) {
     barColor = Colors.completedBackground;
   }
 

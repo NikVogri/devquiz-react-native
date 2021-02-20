@@ -8,25 +8,12 @@ import QuizStep from "../components/Quiz/QuizStep";
 import Colors from "../constants/Colors";
 import QuizContext from "../context/QuizContext";
 
-export default function Quiz({
-  navigation,
-  route,
-}: {
-  navigation: any;
-  route: any;
-}) {
-  const { quiz, findQuiz, step, quizIsFinished, correctAnswers } = useContext(
+export default function Quiz({ navigation }: { navigation: any; route: any }) {
+  const { quiz, step, quizIsFinished, correctAnswers } = useContext(
     QuizContext
   );
 
-  useEffect(() => {
-    const quizId = route.params.id;
-    if (quizId) {
-      findQuiz(quizId);
-    }
-  }, [route.params.id]);
-
-  if (!quiz) {
+  if (!quiz || !quiz.questionsAndAnswers) {
     return (
       <View style={style.quiz}>
         <Text>Quiz Not Found</Text>
@@ -44,10 +31,7 @@ export default function Quiz({
         </TouchableWithoutFeedback>
       </View>
       <View>
-        <QuizCompletionBar
-          completedQuestions={step}
-          totalQuestions={quiz.totalQuestions}
-        />
+        <QuizCompletionBar />
       </View>
       {!quizIsFinished && <QuizStep />}
       {quizIsFinished && (

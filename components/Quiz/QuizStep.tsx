@@ -5,16 +5,18 @@ import QuizAnswers from "./QuizAnswers";
 import QuizQuestion from "./QuizQuestion";
 
 const QuizStep = () => {
-  const { currentQandA, handleAnswer } = useContext(QuizContext);
-
+  const { handleAnswer, step, quiz } = useContext(QuizContext);
   return (
     <View>
       <View>
         <QuizQuestion
-          question={currentQandA.question}
-          questionType={currentQandA.questionType}
+          question={quiz.questionsAndAnswers[step].question}
+          questionType={quiz.questionsAndAnswers[step].questionType}
         />
-        <QuizAnswers answers={currentQandA.answers} nextStep={handleAnswer} />
+        <QuizAnswers
+          answers={quiz.questionsAndAnswers[step].answers}
+          nextStep={handleAnswer}
+        />
       </View>
     </View>
   );
