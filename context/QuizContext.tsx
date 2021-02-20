@@ -70,6 +70,10 @@ export const QuizProvider = ({ children }: any) => {
 
   const [quizIsFinished, setQuizIsFinished] = useState(false);
 
+  /**
+   * @description Finds a quiz by id and checks if quiz was already started previously. Sets state accordingly
+   * @param quizId
+   */
   const findQuiz = async (quizId: number) => {
     const foundQuiz = quizList.find((quiz) => quiz.id === quizId);
 
@@ -77,13 +81,15 @@ export const QuizProvider = ({ children }: any) => {
       setQuiz(foundQuiz);
       if (foundQuiz.questionsAndAnswers) {
         const localQuizData = await getData(`quiz-${foundQuiz.id}`);
+
         if (localQuizData) {
+          const isFinished =
+            localQuizData.lastCompletedStep === foundQuiz.totalQuestions;
+
           setStep(localQuizData.lastCompletedStep);
           setCorrectAnswers(localQuizData.correctAnswers);
           setWrongAnswers(localQuizData.wrongAnswers);
-          setQuizIsFinished(
-            localQuizData.lastCompletedStep === foundQuiz.totalQuestions
-          );
+          setQuizIsFinished(isFinished);
         } else {
           setStep(0);
           setCorrectAnswers(0);
@@ -92,11 +98,16 @@ export const QuizProvider = ({ children }: any) => {
         }
       }
     } else {
+      // incomplete quiz - shouldn't ever happen, but if it does we're prepared
       setQuizIsFinished(false);
       setStep(0);
     }
   };
 
+  /**
+   * @description given an answerId check if the answer is correct and update both context and local storage.
+   * @param answerId
+   */
   const handleAnswer = async (answerId: number) => {
     const answer = quiz.questionsAndAnswers[step].answers.find(
       (answer: Answer) => answer.id === answerId

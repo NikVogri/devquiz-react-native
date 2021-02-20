@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, ScrollView } from "react-native";
 import Main from "../components/Layout/Main";
 import QuizCard from "../components/Quiz/QuizCard";
 import Colors from "../constants/Colors";
@@ -7,12 +7,7 @@ import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
 import quizList from "../quiz/list";
 import { useIsFocused } from "@react-navigation/native";
 
-export default function QuizList({
-  navigation,
-}: {
-  navigation: any;
-  route: any;
-}) {
+export default function QuizList({ navigation }: { navigation: any }) {
   const isFocused = useIsFocused();
   const { getAllDataKeys, getData } = useAsyncLocalStorage();
   const [quizes, setQuizes] = useState([]);
@@ -27,11 +22,13 @@ export default function QuizList({
    */
   const getAllSavedQuizes = async () => {
     try {
-      setLoading(true);
       const dataKeys = await getAllDataKeys();
+      setLoading(true);
+
       for (const quiz of quizList) {
         quiz.completedQuestions = 0;
       }
+
       for (const dataKey of dataKeys) {
         const localQuizData = await getData(dataKey);
         const quizId = dataKey.split("-")[1] - 1;

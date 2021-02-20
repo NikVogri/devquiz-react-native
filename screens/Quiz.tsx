@@ -9,12 +9,11 @@ import Colors from "../constants/Colors";
 import QuizContext from "../context/QuizContext";
 
 export default function Quiz({ navigation }: { navigation: any; route: any }) {
-  const { quiz, step, quizIsFinished, correctAnswers } = useContext(
-    QuizContext
-  );
+  const { quiz, quizIsFinished, correctAnswers } = useContext(QuizContext);
 
   if (!quiz || !quiz.questionsAndAnswers) {
     return (
+      // TODO: ADD IMAGE / STYLES
       <View style={style.quiz}>
         <Text>Quiz Not Found</Text>
       </View>

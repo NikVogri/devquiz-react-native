@@ -19,7 +19,7 @@ export default function QuizIntro({
 
   useEffect(() => {
     const quizId = route.params.id;
-    // removeData(`quiz-${quizId}`); // placeholder
+    // removeData(`quiz-${quizId}`); // toggle -> for dev purpose
     if (quizId) {
       findQuiz(quizId);
     }
