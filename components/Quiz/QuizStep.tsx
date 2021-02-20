@@ -1,27 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View } from "react-native";
-import { Answer } from "./QuizAnswer";
+import QuizContext from "../../context/QuizContext";
 import QuizAnswers from "./QuizAnswers";
 import QuizQuestion from "./QuizQuestion";
 
-interface QuizStepProps {
-  nextStep: () => void;
-  question: string;
-  questionType: "text" | "code";
-  answers: Answer[];
-}
+const QuizStep = () => {
+  const { currentQandA, handleAnswer } = useContext(QuizContext);
 
-const QuizStep = ({
-  nextStep,
-  question,
-  questionType,
-  answers,
-}: QuizStepProps) => {
   return (
     <View>
       <View>
-        <QuizQuestion question={question} questionType={questionType} />
-        <QuizAnswers answers={answers} nextStep={nextStep} />
+        <QuizQuestion
+          question={currentQandA.question}
+          questionType={currentQandA.questionType}
+        />
+        <QuizAnswers answers={currentQandA.answers} nextStep={handleAnswer} />
       </View>
     </View>
   );

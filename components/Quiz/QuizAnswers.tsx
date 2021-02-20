@@ -4,14 +4,18 @@ import QuizAnswer, { Answer } from "./QuizAnswer";
 
 interface QuizAnswersProps {
   answers: Answer[];
-  nextStep: () => void;
+  nextStep: (answerId: number) => void;
 }
 
 const QuizAnswers = ({ answers, nextStep }: QuizAnswersProps) => {
   return (
     <View>
       {answers.map((answer) => (
-        <QuizAnswer key={answer.id} {...answer} nextStep={nextStep} />
+        <QuizAnswer
+          key={answer.id}
+          {...answer}
+          nextStep={() => nextStep(answer.id)}
+        />
       ))}
     </View>
   );

@@ -14,6 +14,7 @@ import QuizIntro from "../screens/QuizIntro";
 import QuizList from "../screens/QuizList";
 
 import Colors from "../constants/Colors";
+import { QuizProvider } from "../context/QuizContext";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -90,11 +91,13 @@ const QuizStackNav = createStackNavigator();
 
 function QuizNavigator() {
   return (
-    <QuizStackNav.Navigator screenOptions={{ headerShown: false }}>
-      <QuizStackNav.Screen name="QuizList" component={QuizList} />
-      <QuizStackNav.Screen name="QuizIntro" component={QuizIntro} />
-      <QuizStackNav.Screen name="Quiz" component={Quiz} />
-    </QuizStackNav.Navigator>
+    <QuizProvider>
+      <QuizStackNav.Navigator screenOptions={{ headerShown: false }}>
+        <QuizStackNav.Screen name="QuizList" component={QuizList} />
+        <QuizStackNav.Screen name="QuizIntro" component={QuizIntro} />
+        <QuizStackNav.Screen name="Quiz" component={Quiz} />
+      </QuizStackNav.Navigator>
+    </QuizProvider>
   );
 }
 
