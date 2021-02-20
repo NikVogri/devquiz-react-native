@@ -104,8 +104,76 @@ export default [
     id: 2,
     title: "HTML For Begginers",
     image: require("../assets/images/quizes/html.png"),
-    completedQuestions: 9,
-    totalQuestions: 10,
+    completedQuestions: 0,
+    totalQuestions: 3,
+    questionsAndAnswers: [
+      {
+        id: 1,
+        question: "q1'?",
+        questionType: "text",
+        answers: [
+          {
+            id: 1,
+            answer: "a1",
+            isCorrect: false,
+          },
+          {
+            id: 2,
+            answer: "a2",
+            isCorrect: true,
+          },
+          {
+            id: 3,
+            answer: "a3",
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        id: 2,
+        question: "q2'?",
+        questionType: "text",
+        answers: [
+          {
+            id: 1,
+            answer: "a1",
+            isCorrect: false,
+          },
+          {
+            id: 2,
+            answer: "a2",
+            isCorrect: true,
+          },
+          {
+            id: 3,
+            answer: "a3",
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        id: 3,
+        question: "q3?",
+        questionType: "text",
+        answers: [
+          {
+            id: 1,
+            answer: "a1",
+            isCorrect: false,
+          },
+          {
+            id: 2,
+            answer: "a2",
+            isCorrect: true,
+          },
+          {
+            id: 3,
+            answer: "a3",
+            isCorrect: false,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 3,
