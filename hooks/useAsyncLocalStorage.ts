@@ -4,7 +4,9 @@ interface useAsyncLocalStorage {
   storeData: (key: string, data: any) => Promise<any>;
   getData: (key: string | string[]) => Promise<any>;
   removeData: (key: string) => Promise<void>;
+  pushData: (key: string, dataToPush: any) => Promise<void>;
   getAllDataKeys: () => Promise<any>;
+  flushData: () => Promise<any>;
 }
 
 export const useAsyncLocalStorage = (): useAsyncLocalStorage => {
@@ -54,5 +56,45 @@ export const useAsyncLocalStorage = (): useAsyncLocalStorage => {
     }
   };
 
-  return { storeData, getData, removeData, getAllDataKeys };
+  const pushData = async (key: string, dataToPush: any) => {
+    try {
+      const data = await getData(key);
+
+      let dataToStore;
+
+      if (data) {
+        if (typeof dataToPush !== "string") {
+          dataToStore = [...data, JSON.stringify(dataToPush)];
+        } else {
+          dataToStore = [...data, dataToPush];
+        }
+      } else {
+        dataToStore = [dataToPush];
+      }
+      await storeData(key, JSON.stringify(dataToStore));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const flushData = async () => {
+    try {
+      const dataKeys = await getAllDataKeys();
+
+      if (dataKeys && dataKeys.length > 0) {
+        await AsyncStorage.multiRemove(dataKeys);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return {
+    storeData,
+    getData,
+    removeData,
+    getAllDataKeys,
+    pushData,
+    flushData,
+  };
 };
