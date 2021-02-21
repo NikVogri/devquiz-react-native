@@ -79,7 +79,7 @@ const style = StyleSheet.create({
     paddingBottom: 180,
     justifyContent: "center",
     flexDirection: "row",
-    minHeight: "70%",
+    minHeight: Colors.fullHeight,
     flexWrap: "wrap",
     backgroundColor: Colors.backgroundDark,
   },

@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export default {
   backgroundPrimary: "#333333",
   backgroundDark: "#1E1E1E",
@@ -17,4 +19,5 @@ export default {
   },
   NavbarPrimary: "#1C1B1B",
   borderPrimary: "#333333",
+  fullHeight: Dimensions.get("window").height - 345,
 };

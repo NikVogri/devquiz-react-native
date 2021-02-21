@@ -13,7 +13,6 @@ export default function Awards() {
 
   useEffect(() => {
     if (isFocused) {
-      console.log("getting local");
       getLocalAwards();
     }
   }, [isFocused]);
@@ -37,6 +36,7 @@ export default function Awards() {
 const style = StyleSheet.create({
   awards: {
     paddingTop: 20,
+    minHeight: Colors.fullHeight,
     padding: 10,
     paddingBottom: 180,
     justifyContent: "center",
