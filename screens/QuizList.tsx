@@ -14,7 +14,9 @@ export default function QuizList({ navigation }: { navigation: any }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getAllSavedQuizes();
+    if (isFocused) {
+      getAllSavedQuizes();
+    }
   }, [isFocused]);
 
   /**
@@ -22,7 +24,8 @@ export default function QuizList({ navigation }: { navigation: any }) {
    */
   const getAllSavedQuizes = async () => {
     try {
-      const dataKeys = await getAllDataKeys();
+      let dataKeys = (await getAllDataKeys()) as string[];
+      dataKeys = dataKeys.filter((key) => key.match(/quiz-[1-99]/g));
       setLoading(true);
 
       for (const quiz of quizList) {
@@ -31,7 +34,7 @@ export default function QuizList({ navigation }: { navigation: any }) {
 
       for (const dataKey of dataKeys) {
         const localQuizData = await getData(dataKey);
-        const quizId = dataKey.split("-")[1] - 1;
+        const quizId = Number(dataKey.split("-")[1]) - 1;
         quizList[quizId].completedQuestions = localQuizData.lastCompletedStep;
       }
 
