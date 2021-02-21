@@ -15,12 +15,10 @@ export default function QuizIntro({
   navigation: any;
   route: Route;
 }) {
-  const { quiz, findQuiz, quizIsFinished } = useContext(QuizContext);
-  const { removeData } = useAsyncLocalStorage();
+  const { quiz, findQuiz, step } = useContext(QuizContext);
 
   useEffect(() => {
     const quizId = route.params.id;
-    // removeData(`quiz-${quizId}`); // toggle -> for dev purpose
     if (quizId) {
       findQuiz(quizId);
     }
@@ -51,7 +49,7 @@ export default function QuizIntro({
           eligendi modi quis quia odit assumenda cupiditate itaque.
         </Text>
         <StartQuizButton
-          isStarted={quiz.completedQuestions > 0}
+          isStarted={step > 0}
           startQuiz={() => navigation.navigate("Quiz", { id: quiz!.id })}
         />
       </View>
