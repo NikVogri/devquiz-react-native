@@ -5,8 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import StartQuizButton from "../components/UI/StartQuizButton";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import QuizContext from "../context/QuizContext";
-import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
-import QuizComplete from "../components/Quiz/QuizCompleted";
 
 export default function QuizIntro({
   navigation,

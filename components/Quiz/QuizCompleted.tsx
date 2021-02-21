@@ -80,7 +80,7 @@ const style = StyleSheet.create({
   },
   message: {
     fontSize: 32,
-    marginBottom: 100,
+    marginBottom: 50,
     color: Colors.white,
   },
   button: {
@@ -89,6 +89,7 @@ const style = StyleSheet.create({
     paddingVertical: 15,
     width: "100%",
     ...Colors.shadow,
+    marginBottom: 15,
   },
   text: {
     color: Colors.white,

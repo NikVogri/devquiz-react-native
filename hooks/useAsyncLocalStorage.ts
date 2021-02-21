@@ -63,11 +63,7 @@ export const useAsyncLocalStorage = (): useAsyncLocalStorage => {
       let dataToStore;
 
       if (data) {
-        if (typeof dataToPush !== "string") {
-          dataToStore = [...data, JSON.stringify(dataToPush)];
-        } else {
-          dataToStore = [...data, dataToPush];
-        }
+        dataToStore = [dataToPush, ...data];
       } else {
         dataToStore = [dataToPush];
       }
