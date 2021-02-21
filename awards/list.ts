@@ -4,7 +4,7 @@ export default [
     quizId: 1,
     text: "Completed CSS For Begginers Quiz",
     date: new Date(),
-    image: require("../assets/images/quizes/css.png"),
+    image: require("../assets/images/awards/css-thumbnail.png"),
   },
   {
     id: 2,
