@@ -2,17 +2,19 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 
-const AwardCard = () => {
+interface AwardCard {
+  id?: number;
+  quizId?: number;
+  text: string;
+  image: any;
+  date: Date;
+}
+
+const AwardCard = ({ text, image }: AwardCard) => {
   return (
     <View style={style.card}>
-      <Image
-        source={require("../../assets/images/quizes/html.png")}
-        style={style.image}
-      />
-      <Text style={style.text}>
-        Completed HTML For Begginers quiz Completed HTML For Beggin Completed
-        HTML For Begginers
-      </Text>
+      <Image source={image} style={style.image} />
+      <Text style={style.text}>{text}</Text>
     </View>
   );
 };

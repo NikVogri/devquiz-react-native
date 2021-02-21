@@ -1,24 +1,34 @@
-import * as React from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 import AwardCard from "../components/Awards/AwardCard";
 import Main from "../components/Layout/Main";
+import { useIsFocused } from "@react-navigation/native";
+import AwardsContext from "../context/AwardsContext";
 
 export default function Awards() {
+  const { awards, getLocalAwards } = useContext(AwardsContext);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      console.log("getting local");
+      getLocalAwards();
+    }
+  }, [isFocused]);
+
   return (
     <Main>
       <ScrollView contentContainerStyle={style.awards}>
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
-        <AwardCard />
+        {awards.map((award) => (
+          <AwardCard
+            key={award.id}
+            date={award.date}
+            image={award.image}
+            text={award.text}
+          />
+        ))}
       </ScrollView>
     </Main>
   );
