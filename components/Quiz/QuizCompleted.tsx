@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
+import AwardsContext, { AwardType } from "../../context/AwardsContext";
 import QuizContext from "../../context/QuizContext";
 import calculatePercentage from "../../lib/calculatePercentage";
 
 const QuizComplete = ({ navigation }: { navigation: any }) => {
   const { correctAnswers, quiz, restartQuiz } = useContext(QuizContext);
+  const { pushLocalAward } = useContext(AwardsContext);
 
   const correctAnswersPercentage = calculatePercentage(
     quiz.totalQuestions,
@@ -29,19 +31,30 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
     navigation.navigate("QuizIntro", { id: quiz.id });
   };
 
+  const handleMarkAsCompleted = async () => {
+    await pushLocalAward(quiz.id, AwardType.quiz);
+    navigation.navigate("QuizList");
+  };
+
   return (
     <View style={style.result}>
       <Text style={style.title}>Results:</Text>
       <Text style={style.percentage}>{correctAnswersPercentage} %</Text>
       <Text style={style.message}>{resultMessage}</Text>
-      {correctAnswersPercentage < 100 && (
+      {correctAnswersPercentage === 100 && (
         <TouchableWithoutFeedback
           containerStyle={style.button}
-          onPress={handleTryAgain}
+          onPress={handleMarkAsCompleted}
         >
-          <Text style={style.text}>Try Again</Text>
+          <Text style={style.text}>Mark As Completed</Text>
         </TouchableWithoutFeedback>
       )}
+      <TouchableWithoutFeedback
+        containerStyle={style.button}
+        onPress={handleTryAgain}
+      >
+        <Text style={style.text}>Try Again</Text>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
