@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import AwardsContext, { AwardType } from "../../context/AwardsContext";
+import HeartContext, { HeartUpdate } from "../../context/HeartContext";
 import QuizContext from "../../context/QuizContext";
 import calculatePercentage from "../../lib/calculatePercentage";
+import CompleteQuizButton from "../UI/CompleteQuizButton";
+import RetryQuizButton from "../UI/RetryQuizButton";
 
 const QuizComplete = ({ navigation }: { navigation: any }) => {
   const { correctAnswers, quiz, restartQuiz } = useContext(QuizContext);
+  const { updateHeartsCount } = useContext(HeartContext);
   const { pushLocalAward } = useContext(AwardsContext);
 
   const correctAnswersPercentage = calculatePercentage(
@@ -28,6 +31,7 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
 
   const handleTryAgain = async () => {
     await restartQuiz();
+    updateHeartsCount(HeartUpdate.remove, 1);
     navigation.navigate("QuizIntro", { id: quiz.id });
   };
 
@@ -42,21 +46,13 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
       <Text style={style.percentage}>{correctAnswersPercentage} %</Text>
       <Text style={style.message}>{resultMessage}</Text>
       {correctAnswersPercentage === 100 && (
-        <TouchableWithoutFeedback
-          containerStyle={style.button}
-          onPress={handleMarkAsCompleted}
-        >
-          <Text style={style.text}>Mark As Completed</Text>
-        </TouchableWithoutFeedback>
+        <CompleteQuizButton onPress={handleMarkAsCompleted} />
       )}
-      <TouchableWithoutFeedback
-        containerStyle={style.button}
-        onPress={handleTryAgain}
-      >
-        <Text style={style.text}>Try Again</Text>
-      </TouchableWithoutFeedback>
       {correctAnswersPercentage !== 100 && (
-        <Text style={style.smallText}>Earn 100% to complete the quiz</Text>
+        <>
+          <RetryQuizButton onPress={handleTryAgain} />
+          <Text style={style.smallText}>Earn 100% to complete the quiz</Text>
+        </>
       )}
     </View>
   );
@@ -85,20 +81,6 @@ const style = StyleSheet.create({
     fontSize: 32,
     marginBottom: 50,
     color: Colors.white,
-  },
-  button: {
-    backgroundColor: Colors.primaryButton,
-    borderRadius: 10,
-    paddingVertical: 15,
-    width: "100%",
-    ...Colors.shadow,
-    marginBottom: 15,
-  },
-  text: {
-    color: Colors.white,
-    textAlign: "center",
-    fontSize: 24,
-    fontWeight: "400",
   },
   smallText: {
     color: Colors.white,
