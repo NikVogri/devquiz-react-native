@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Main from "../components/Layout/Main";
-import Button from "../components/UI/Button";
+import PrimaryButton from "../components/UI/PrimaryButton";
 import Colors from "../constants/Colors";
 import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
 import { showPromptNotification } from "../lib/showNotification";
@@ -25,14 +25,10 @@ export default function Profile() {
   return (
     <Main>
       <View style={style.container}>
-        <Button title="Flush Local Data" onClick={handleDataFlush} />
-        <Button
-          title="Delete Account"
-          onClick={() => console.log("account deleted")}
-        />
-        <Button
+        <PrimaryButton title="Flush Local Data" onPress={handleDataFlush} />
+        <PrimaryButton
           title="Contact Support"
-          onClick={() => console.log("Contact support")}
+          onPress={() => console.log("Contact support")}
         />
       </View>
     </Main>

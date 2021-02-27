@@ -1,17 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { BaseButton } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 
-interface ButtonProps {
+interface PrimaryButtonProps {
   title: string;
-  onClick: () => void;
+  onPress: () => void;
 }
 
-const Button = ({ title, onClick }: ButtonProps) => {
+const PrimaryButton = ({ title, onPress }: PrimaryButtonProps) => {
   return (
-    <View onTouchStart={onClick} style={style.button}>
+    <BaseButton style={style.button} onPress={onPress}>
       <Text style={style.text}>{title}</Text>
-    </View>
+    </BaseButton>
   );
 };
 
@@ -36,4 +37,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Button;
+export default PrimaryButton;
