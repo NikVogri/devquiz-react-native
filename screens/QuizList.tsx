@@ -79,7 +79,6 @@ const style = StyleSheet.create({
     paddingBottom: 180,
     justifyContent: "center",
     flexDirection: "row",
-    minHeight: Colors.fullHeight,
     flexWrap: "wrap",
     backgroundColor: Colors.backgroundDark,
   },

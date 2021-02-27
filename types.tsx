@@ -11,4 +11,5 @@ export type BottomTabParamList = {
   quizList: undefined;
   profile: undefined;
   quizIntro: undefined;
+  store: undefined;
 };

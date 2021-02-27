@@ -7,6 +7,8 @@ import * as React from "react";
 
 import ProfileScreen from "../screens/Profile";
 import AwardsScreen from "../screens/Awards";
+import StoreScreen from "../screens/StoreScreen";
+
 import { BottomTabParamList } from "../types";
 import { StyleSheet } from "react-native";
 import Quiz from "../screens/Quiz";
@@ -52,15 +54,29 @@ export default function BottomTabNavigator() {
             ),
         }}
       />
+
+      {/* <BottomTab.Screen
+        name="store"
+        component={StoreNavigator}
+        options={{
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <FontAwesome name="shopping-cart" size={24} color="white" />
+            ) : (
+              <FontAwesome name="shopping-cart" size={24} color="gray" />
+            ),
+        }}
+      /> */}
+
       <BottomTab.Screen
         name="profile"
         component={ProfileNavigator}
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <FontAwesome name="user" size={24} color="white" />
+              <FontAwesome name="cog" size={24} color="white" />
             ) : (
-              <FontAwesome name="user" size={24} color="gray" />
+              <FontAwesome name="cog" size={24} color="gray" />
             ),
         }}
       />
@@ -110,3 +126,14 @@ function ProfileNavigator() {
     </Profile.Navigator>
   );
 }
+
+// TODO: in v2
+// const Store = createStackNavigator();
+
+// function StoreNavigator() {
+//   return (
+//     <Store.Navigator screenOptions={{ headerShown: false }}>
+//       <Store.Screen name="Store" component={StoreScreen} />
+//     </Store.Navigator>
+//   );
+// }

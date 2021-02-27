@@ -60,7 +60,6 @@ export const HeartsProvider = ({ children }: any) => {
     try {
       await storeData("hearts", newHeartCount);
       setHearts(newHeartCount);
-      console.log(newHeartCount);
     } catch (err) {
       console.log(err);
     }
