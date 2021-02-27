@@ -12,7 +12,7 @@ interface useAsyncLocalStorage {
 export const useAsyncLocalStorage = (): useAsyncLocalStorage => {
   const storeData = async (key: string, data: any) => {
     try {
-      if (typeof data === "object") {
+      if (typeof data === "object" || typeof data === "number") {
         data = JSON.stringify(data);
       }
 
