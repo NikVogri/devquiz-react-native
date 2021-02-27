@@ -28,7 +28,7 @@ const AwardsContext = createContext<AwardsContextInterface>({
 });
 
 export const AwardsProvider = ({ children }: any) => {
-  const { getData, pushData, getAllDataKeys } = useAsyncLocalStorage();
+  const { getData, pushData } = useAsyncLocalStorage();
   const [awards, setAwards] = useState([]);
 
   const getLocalAwards = async () => {
