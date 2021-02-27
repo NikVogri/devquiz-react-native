@@ -55,6 +55,9 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
       >
         <Text style={style.text}>Try Again</Text>
       </TouchableWithoutFeedback>
+      {correctAnswersPercentage !== 100 && (
+        <Text style={style.smallText}>Earn 100% to complete the quiz</Text>
+      )}
     </View>
   );
 };
@@ -96,6 +99,11 @@ const style = StyleSheet.create({
     textAlign: "center",
     fontSize: 24,
     fontWeight: "400",
+  },
+  smallText: {
+    color: Colors.white,
+    textAlign: "center",
+    fontSize: 12,
   },
 });
 
