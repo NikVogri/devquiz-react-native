@@ -4,8 +4,9 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
+import { MAX_HEARTS } from "../../constants/Constants";
 import CoinContext from "../../context/CoinContext";
-import HeartContext, { MAX_HEARTS } from "../../context/HeartContext";
+import HeartContext from "../../context/HeartContext";
 import ModalContext, { Modal } from "../../context/ModalContext";
 
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
     openModal(Modal.store);
   };
 
+  console.log(hearts);
   return (
     <View style={style.header}>
       <View style={style.iconContainer}>
