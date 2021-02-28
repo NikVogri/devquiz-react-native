@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import * as React from "react";
 import { Dimensions, Linking, StyleSheet, Text, View } from "react-native";
 import Main from "../components/Layout/Main";
@@ -7,7 +8,21 @@ import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
 import { showPromptNotification } from "../lib/showNotification";
 
 export default function Profile() {
-  const { flushData } = useAsyncLocalStorage();
+  const { flushData, getAllDataKeys, getData } = useAsyncLocalStorage();
+
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {
+    if (isFocused) {
+      getAllLocalStorageData();
+    }
+  }, [isFocused]);
+
+  // FOR DEV ONLY
+  const getAllLocalStorageData = async () => {
+    const keys = await getAllDataKeys();
+    keys.forEach(async (key: string) => console.log(key, await getData(key)));
+  };
 
   const handleDataFlush = async () => {
     const notification = {

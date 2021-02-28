@@ -18,7 +18,6 @@ const Header = () => {
     openModal(Modal.store);
   };
 
-  console.log(hearts);
   return (
     <View style={style.header}>
       <View style={style.iconContainer}>
