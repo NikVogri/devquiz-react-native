@@ -45,7 +45,7 @@ const style = StyleSheet.create({
   card: {
     backgroundColor: Colors.backgroundPrimary,
     borderRadius: 10,
-    width: "43%",
+    width: 150,
 
     // maxHeight: 180,
     margin: 10,
