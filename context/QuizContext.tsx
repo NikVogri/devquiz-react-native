@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
+import { useNavigation } from "@react-navigation/native";
 import quizList from "../quiz/list";
 
 export enum QuestionType {
@@ -71,6 +72,8 @@ export const QuizProvider = ({ children }: any) => {
   const [wrongAnswers, setWrongAnswers] = useState(0);
 
   const [quizIsFinished, setQuizIsFinished] = useState(false);
+
+  const navigation = useNavigation();
 
   /**
    * @description Finds a quiz by id and checks if quiz was already started previously. Sets state accordingly
@@ -151,7 +154,8 @@ export const QuizProvider = ({ children }: any) => {
       setCorrectAnswers(0);
       setWrongAnswers(0);
       setQuizIsFinished(false);
-      return await removeData(`quiz-${quiz.id}`);
+      await removeData(`quiz-${quiz.id}`);
+      navigation.navigate("Quiz", { id: quiz.id });
     } catch (err) {
       console.log(err);
     }

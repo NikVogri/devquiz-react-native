@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Route, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../constants/Colors";
-import { Entypo, Foundation, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import StartQuizButton from "../components/UI/StartQuizButton";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import QuizContext from "../context/QuizContext";
 import HeartContext from "../context/HeartContext";
+import WatchVideoButton from "../components/UI/WatchVideoButton";
+import RestartQuizButton from "../components/UI/RestartQuizButton";
 
 export default function QuizIntro({
   navigation,
@@ -14,7 +16,9 @@ export default function QuizIntro({
   navigation: any;
   route: Route;
 }) {
-  const { quiz, findQuiz, step } = useContext(QuizContext);
+  const { quiz, findQuiz, step, quizIsFinished, restartQuiz } = useContext(
+    QuizContext
+  );
   const { hearts } = useContext(HeartContext);
 
   useEffect(() => {
@@ -48,11 +52,15 @@ export default function QuizIntro({
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed commodi
           eligendi modi quis quia odit assumenda cupiditate itaque.
         </Text>
-        {hearts > 0 && (
+        {hearts > 0 && !quizIsFinished && (
           <StartQuizButton
             isStarted={step > 0}
             startQuiz={() => navigation.navigate("Quiz", { id: quiz!.id })}
           />
+        )}
+
+        {hearts > 0 && quizIsFinished && (
+          <RestartQuizButton onPress={restartQuiz} />
         )}
 
         {/* todo
@@ -60,17 +68,7 @@ export default function QuizIntro({
           - ADD LOGIC TO WATCH VIDEO
         */}
         {hearts === 0 && (
-          <View>
-            <TouchableWithoutFeedback
-              onPress={() => console.log("show video window")}
-              style={style.watchVideoButton}
-            >
-              <Text style={style.watchVideoButtonText}>
-                Watch a short ad to refill you hearts{" "}
-              </Text>
-              <Entypo name="video" size={24} color="white" />
-            </TouchableWithoutFeedback>
-          </View>
+          <WatchVideoButton onPress={() => console.log("show video window")} />
         )}
       </View>
     </View>
@@ -116,23 +114,5 @@ const style = StyleSheet.create({
     fontWeight: "500",
     color: Colors.white,
     lineHeight: 25,
-  },
-  watchVideoButton: {
-    backgroundColor: "#2F80ED",
-    borderRadius: 10,
-    paddingVertical: 15,
-    width: "100%",
-    ...Colors.shadow,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  watchVideoButtonText: {
-    color: Colors.white,
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: "400",
-    marginRight: 5,
   },
 });
