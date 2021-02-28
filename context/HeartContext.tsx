@@ -32,6 +32,7 @@ export const HeartsProvider = ({ children }: any) => {
   const getHeartAmountFromLC = async () => {
     try {
       const heartsCount = await getData("hearts");
+      console.log("here", heartsCount);
       if (heartsCount === null) {
         setHearts(MAX_HEARTS);
         await storeData("hearts", MAX_HEARTS);

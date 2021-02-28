@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import OutOfHeartsModal from "../components/UI/Modal/OutOfHeartsModal";
-enum Modal {
+export enum Modal {
   outOfHearts = "outOfHearts",
 }
 
@@ -16,7 +16,7 @@ const ModalContext = createContext<ModalContextInterface>({
 
 export const ModalProvider = ({ children }: any) => {
   const [modal, setModal] = useState<Modal>(Modal.outOfHearts);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const openModal = (type: Modal) => {
     setModal(type);

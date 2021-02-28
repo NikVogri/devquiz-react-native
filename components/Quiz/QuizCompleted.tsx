@@ -1,17 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 import AwardsContext, { AwardType } from "../../context/AwardsContext";
 import HeartContext, { HeartUpdate } from "../../context/HeartContext";
+import ModalContext from "../../context/ModalContext";
 import QuizContext from "../../context/QuizContext";
 import calculatePercentage from "../../lib/calculatePercentage";
 import CompleteQuizButton from "../UI/CompleteQuizButton";
 import RetryQuizButton from "../UI/RetryQuizButton";
 
+import { Modal } from "../../context/ModalContext";
+
 const QuizComplete = ({ navigation }: { navigation: any }) => {
   const { correctAnswers, quiz, restartQuiz } = useContext(QuizContext);
-  const { updateHeartsCount } = useContext(HeartContext);
+  const { updateHeartsCount, hearts } = useContext(HeartContext);
   const { pushLocalAward } = useContext(AwardsContext);
+  const { openModal } = useContext(ModalContext);
 
   const correctAnswersPercentage = calculatePercentage(
     quiz.totalQuestions,
@@ -28,6 +32,12 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
   } else if (correctAnswersPercentage >= 75) {
     resultMessage = "You're a natural!";
   }
+
+  useEffect(() => {
+    if (correctAnswersPercentage !== 100 && hearts === 0) {
+      openModal(Modal.outOfHearts);
+    }
+  }, [correctAnswersPercentage, hearts]);
 
   const handleTryAgain = async () => {
     await restartQuiz();
@@ -47,7 +57,7 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
       {correctAnswersPercentage === 100 && (
         <CompleteQuizButton onPress={handleMarkAsCompleted} />
       )}
-      {correctAnswersPercentage !== 100 && (
+      {correctAnswersPercentage !== 100 && hearts > 0 && (
         <>
           <RetryQuizButton onPress={handleTryAgain} />
           <Text style={style.smallText}>Earn 100% to complete the quiz</Text>
