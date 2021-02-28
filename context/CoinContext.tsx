@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
-
-const INITIAL_COIN_AMOUNT = 300;
+import { INITIAL_COIN_AMOUNT } from "../constants/Constants";
 
 export enum Coins {
   refill_hearts = 50,

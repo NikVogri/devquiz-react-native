@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
+import { MAX_HEARTS } from "../constants/Constants";
 import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
-
-export const MAX_HEARTS = 5;
 
 export enum HeartUpdate {
   add = "add",
