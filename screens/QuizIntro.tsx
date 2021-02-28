@@ -90,7 +90,7 @@ const style = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200,
+    height: "40%",
   },
   info: {
     padding: 20,
