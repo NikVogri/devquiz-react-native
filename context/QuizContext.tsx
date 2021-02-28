@@ -11,7 +11,7 @@ export enum QuestionType {
 export interface Question {
   id: number;
   question: string;
-  questionType: QuestionType;
+  questionMetadata: { type: QuestionType; language?: string };
 }
 
 export interface Answer {

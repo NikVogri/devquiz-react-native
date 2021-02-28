@@ -4,12 +4,12 @@ export default [
     title: "CSS For Begginers",
     image: require("../assets/images/quizes/css.png"),
     completedQuestions: 0,
-    totalQuestions: 4,
+    totalQuestions: 5,
     questionsAndAnswers: [
       {
         id: 1,
         question: "Which of the following is not a CSS framework?",
-        questionType: "text",
+        questionMetadata: { type: "text" },
         answers: [
           {
             id: 1,
@@ -32,7 +32,7 @@ export default [
         id: 2,
         question:
           "Property 'color' is used to change the background color of a given element.",
-        questionType: "text",
+        questionMetadata: { type: "text" },
         answers: [
           {
             id: 1,
@@ -50,7 +50,7 @@ export default [
         id: 3,
         question:
           "What is the difference between class selectors and id selectors?",
-        questionType: "text",
+        questionMetadata: { type: "text" },
         answers: [
           {
             id: 1,
@@ -76,7 +76,7 @@ export default [
         id: 4,
         question:
           "What is the difference between 'visibility: hidden' and 'display: none'?",
-        questionType: "text",
+        questionMetadata: { type: "text" },
         answers: [
           {
             id: 1,
@@ -98,6 +98,29 @@ export default [
           },
         ],
       },
+      {
+        id: 5,
+        question:
+          "CSS has multiple valid units. Which of the following units is not valid: cm, ch, in, ft, px, ex, rem?",
+        questionMetadata: { type: "text" },
+        answers: [
+          {
+            id: 1,
+            answer: "ft",
+            isCorrect: true,
+          },
+          {
+            id: 2,
+            answer: "ex",
+            isCorrect: false,
+          },
+          {
+            id: 3,
+            answer: "cm",
+            isCorrect: false,
+          },
+        ],
+      },
     ],
   },
   {
@@ -109,30 +132,33 @@ export default [
     questionsAndAnswers: [
       {
         id: 1,
-        question: "q1'?",
-        questionType: "text",
+        question: `Is this syntax valid?
+
+<select name="cars" id="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select>
+        `,
+        questionMetadata: { type: "code", language: "html" },
         answers: [
           {
             id: 1,
-            answer: "a1",
+            answer: "yes",
             isCorrect: false,
           },
           {
             id: 2,
-            answer: "a2",
+            answer: "no",
             isCorrect: true,
-          },
-          {
-            id: 3,
-            answer: "a3",
-            isCorrect: false,
           },
         ],
       },
       {
         id: 2,
         question: "q2'?",
-        questionType: "text",
+        questionMetadata: { type: "text" },
         answers: [
           {
             id: 1,
@@ -154,7 +180,7 @@ export default [
       {
         id: 3,
         question: "q3?",
-        questionType: "text",
+        questionMetadata: { type: "text" },
         answers: [
           {
             id: 1,

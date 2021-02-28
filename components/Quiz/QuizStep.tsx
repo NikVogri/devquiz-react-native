@@ -11,7 +11,7 @@ const QuizStep = () => {
       <View>
         <QuizQuestion
           question={quiz.questionsAndAnswers[step].question}
-          questionType={quiz.questionsAndAnswers[step].questionType}
+          questionMetadata={quiz.questionsAndAnswers[step].questionMetadata}
         />
         <QuizAnswers
           answers={quiz.questionsAndAnswers[step].answers}
