@@ -142,6 +142,9 @@ export const QuizProvider = ({ children }: any) => {
     setStep(nextStep);
   };
 
+  /**
+   * @description Restarts quiz by setting all values to default and removing record from local storage
+   */
   const restartQuiz = async () => {
     try {
       setStep(0);

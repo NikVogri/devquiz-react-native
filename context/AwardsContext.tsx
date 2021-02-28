@@ -31,6 +31,9 @@ export const AwardsProvider = ({ children }: any) => {
   const { getData, pushData } = useAsyncLocalStorage();
   const [awards, setAwards] = useState([]);
 
+  /**
+   * @description fetches awards from local storage
+   */
   const getLocalAwards = async () => {
     try {
       const awards = await getData(`awards`);
@@ -45,14 +48,25 @@ export const AwardsProvider = ({ children }: any) => {
     }
   };
 
+  /**
+   *
+   * @param id
+   * @param type
+   * @description pushes new award to local storage
+   */
   const pushLocalAward = async (id: number, type: AwardType) => {
+    const awards: Award[] | null = await getData("awards");
+    const isAwardAlreadyStored = awards?.find((award) => award.id === id);
+
+    if (isAwardAlreadyStored) return;
+
     let award;
     if (type === AwardType.quiz) {
       award = awardsList.find((award) => award.quizId === id);
     } else {
       award = awardsList.find((award) => award.id === id);
     }
-    await pushData(`awards`, award);
+    await pushData("awards", award);
   };
 
   return (

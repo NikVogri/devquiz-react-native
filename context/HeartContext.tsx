@@ -26,6 +26,9 @@ export const HeartsProvider = ({ children }: any) => {
     getHeartAmountFromLC();
   }, []);
 
+  /**
+   * @description Fetches hearts count from local storage when application first loads
+   */
   const getHeartAmountFromLC = async () => {
     try {
       const heartsCount = await getData("hearts");
@@ -39,6 +42,13 @@ export const HeartsProvider = ({ children }: any) => {
       console.log(err);
     }
   };
+
+  /**
+   *
+   * @param type
+   * @param changedAmount
+   * @description sets a new hearts count value (add or remove)
+   */
 
   const updateHeartsCount = async (
     type: HeartUpdate,
