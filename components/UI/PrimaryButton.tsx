@@ -4,14 +4,28 @@ import { BaseButton } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 
 interface PrimaryButtonProps {
-  title: string;
+  title?: string;
   onPress: () => void;
+  children?: unknown;
+  color?: string;
 }
 
-const PrimaryButton = ({ title, onPress }: PrimaryButtonProps) => {
+const PrimaryButton = ({
+  title,
+  onPress,
+  children,
+  color,
+}: PrimaryButtonProps) => {
   return (
-    <BaseButton style={style.button} onPress={onPress}>
-      <Text style={style.text}>{title}</Text>
+    <BaseButton
+      style={{
+        ...style.button,
+        backgroundColor: color ? color : Colors.backgroundPrimary,
+      }}
+      onPress={onPress}
+    >
+      {!children && <Text style={style.text}>{title}</Text>}
+      {children && children}
     </BaseButton>
   );
 };
@@ -23,7 +37,6 @@ const style = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.backgroundPrimary,
     paddingTop: 20,
     paddingBottom: 20,
     marginBottom: 15,

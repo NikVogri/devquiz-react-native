@@ -13,9 +13,7 @@ const WatchVideoButton = ({ onPress }: WatchVideoButtonProps) => {
   return (
     <BaseButton onPress={onPress}>
       <View style={style.watchVideoButton}>
-        <Text style={style.watchVideoButtonText}>
-          Watch a short ad to refill you hearts{" "}
-        </Text>
+        <Text style={style.watchVideoButtonText}>Watch a short ad</Text>
         <Entypo name="video" size={24} color="white" />
       </View>
     </BaseButton>
@@ -39,7 +37,7 @@ const style = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     fontWeight: "400",
-    marginRight: 5,
+    marginRight: 10,
   },
 });
 
