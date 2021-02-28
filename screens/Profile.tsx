@@ -44,6 +44,7 @@ export default function Profile() {
           }
         />
       </View>
+
       <View>
         <Text style={style.textCredits}>
           Created by Nik Vogrinec in Slovenia

@@ -4,11 +4,14 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
+import CoinContext from "../../context/CoinContext";
 import HeartContext, { MAX_HEARTS } from "../../context/HeartContext";
 import ModalContext, { Modal } from "../../context/ModalContext";
+
 const Header = () => {
   const { hearts } = useContext(HeartContext);
   const { openModal } = useContext(ModalContext);
+  const { coins } = useContext(CoinContext);
 
   const handleOpenModal = () => {
     openModal(Modal.store);
@@ -47,7 +50,7 @@ const Header = () => {
         onPress={handleOpenModal}
       >
         <View style={style.iconContainer}>
-          <Text style={style.coinsText}>200</Text>
+          <Text style={style.coinsText}>{coins}</Text>
           <FontAwesome5
             name="coins"
             size={18}

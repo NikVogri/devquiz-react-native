@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import Colors from "../../../constants/Colors";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import PrimaryButton from "../PrimaryButton";
+import CoinContext, { Coins } from "../../../context/CoinContext";
+import HeartContext from "../../../context/HeartContext";
 interface OutOfHeartsModalProps {
   showModal: boolean;
   closeModal: () => void;
 }
 
 const OutOfHeartsModal = ({ closeModal, showModal }: OutOfHeartsModalProps) => {
+  const { userHasEnoughCoins, updateCoins } = useContext(CoinContext);
+  const { refillHearts } = useContext(HeartContext);
+
+  const handleRefillHearts = async () => {
+    if (userHasEnoughCoins(Coins.refill_hearts)) {
+      try {
+        await refillHearts();
+        updateCoins(Coins.refill_hearts);
+        closeModal();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <Modal
       isVisible={showModal}
@@ -28,6 +45,21 @@ const OutOfHeartsModal = ({ closeModal, showModal }: OutOfHeartsModalProps) => {
         </View>
 
         <Text style={style.title}>You've ran out of hearts.</Text>
+
+        {userHasEnoughCoins(Coins.refill_hearts) && (
+          <PrimaryButton onPress={handleRefillHearts} color="#27AE60">
+            <View style={style.btn}>
+              <FontAwesome5
+                name="coins"
+                size={14}
+                color="white"
+                style={style.btnIcon}
+              />
+              <Text style={style.btnText}>(50) Buy hearts with coins</Text>
+            </View>
+          </PrimaryButton>
+        )}
+
         <PrimaryButton
           onPress={() => console.log("watching video")}
           color={"#2D9CDB"}
@@ -43,7 +75,7 @@ const OutOfHeartsModal = ({ closeModal, showModal }: OutOfHeartsModalProps) => {
           </View>
         </PrimaryButton>
 
-        <PrimaryButton
+        {/* <PrimaryButton
           onPress={() => console.log("going to store")}
           color="#27AE60"
         >
@@ -56,7 +88,7 @@ const OutOfHeartsModal = ({ closeModal, showModal }: OutOfHeartsModalProps) => {
             />
             <Text style={style.btnText}>Go to Store</Text>
           </View>
-        </PrimaryButton>
+        </PrimaryButton> */}
       </View>
     </Modal>
   );

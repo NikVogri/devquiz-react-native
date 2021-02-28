@@ -10,16 +10,21 @@ export enum HeartUpdate {
 
 interface HeartsContextInterface {
   hearts: number;
-  updateHeartsCount: (type: HeartUpdate, changedAmount: number) => void;
+  updateHeartsCount: (
+    type: HeartUpdate,
+    changedAmount: number
+  ) => Promise<void>;
+  refillHearts: () => Promise<void>;
 }
 
 const HeartContext = createContext<HeartsContextInterface>({
   hearts: 5,
-  updateHeartsCount: () => {},
+  updateHeartsCount: async () => {},
+  refillHearts: async () => {},
 });
 
 export const HeartsProvider = ({ children }: any) => {
-  const [hearts, setHearts] = useState(5);
+  const [hearts, setHearts] = useState(MAX_HEARTS);
   const { storeData, getData } = useAsyncLocalStorage();
 
   useEffect(() => {
@@ -32,7 +37,7 @@ export const HeartsProvider = ({ children }: any) => {
   const getHeartAmountFromLC = async () => {
     try {
       const heartsCount = await getData("hearts");
-      console.log("here", heartsCount);
+      console.log("heartsCount", heartsCount);
       if (heartsCount === null) {
         setHearts(MAX_HEARTS);
         await storeData("hearts", MAX_HEARTS);
@@ -76,8 +81,17 @@ export const HeartsProvider = ({ children }: any) => {
     }
   };
 
+  /**
+   *
+   * @description refills hearts
+   */
+
+  const refillHearts = async () => {
+    await updateHeartsCount(HeartUpdate.add, MAX_HEARTS);
+  };
+
   return (
-    <HeartContext.Provider value={{ hearts, updateHeartsCount }}>
+    <HeartContext.Provider value={{ hearts, updateHeartsCount, refillHearts }}>
       {children}
     </HeartContext.Provider>
   );
