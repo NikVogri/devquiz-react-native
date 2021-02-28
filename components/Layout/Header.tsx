@@ -2,10 +2,17 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import HeartContext, { MAX_HEARTS } from "../../context/HeartContext";
+import ModalContext, { Modal } from "../../context/ModalContext";
 const Header = () => {
   const { hearts } = useContext(HeartContext);
+  const { openModal } = useContext(ModalContext);
+
+  const handleOpenModal = () => {
+    openModal(Modal.store);
+  };
 
   return (
     <View style={style.header}>
@@ -35,10 +42,20 @@ const Header = () => {
           ))}
       </View>
 
-      <View style={style.iconContainer}>
-        <Text style={style.coinsText}>200</Text>
-        <FontAwesome5 name="coins" size={18} color="gold" style={style.coins} />
-      </View>
+      <TouchableWithoutFeedback
+        containerStyle={style.iconContainer}
+        onPress={handleOpenModal}
+      >
+        <View style={style.iconContainer}>
+          <Text style={style.coinsText}>200</Text>
+          <FontAwesome5
+            name="coins"
+            size={18}
+            color="gold"
+            style={style.coins}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
