@@ -17,8 +17,8 @@ const ModalContext = createContext<ModalContextInterface>({
 });
 
 export const ModalProvider = ({ children }: any) => {
-  const [modal, setModal] = useState<Modal>(Modal.store);
-  const [showModal, setShowModal] = useState(true);
+  const [modal, setModal] = useState<Modal | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const openModal = (type: Modal) => {
     setModal(type);
