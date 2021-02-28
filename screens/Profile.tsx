@@ -10,16 +10,17 @@ export default function Profile() {
   const { flushData } = useAsyncLocalStorage();
 
   const handleDataFlush = async () => {
-    const props = {
+    const notification = {
       title: "Flush Local Data?",
-      text: "This will delete all your current progress, continue?",
+      text:
+        "This is intended for development purpose and will delete all your current progress, continue?",
       cancelable: false,
       onConfirm: async () => {
         await flushData();
       },
     };
 
-    showPromptNotification(props);
+    showPromptNotification(notification);
   };
 
   return (
