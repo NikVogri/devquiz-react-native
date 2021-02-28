@@ -32,7 +32,6 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
   const handleTryAgain = async () => {
     await restartQuiz();
     updateHeartsCount(HeartUpdate.remove, 1);
-    navigation.navigate("QuizIntro", { id: quiz.id });
   };
 
   const handleMarkAsCompleted = async () => {
