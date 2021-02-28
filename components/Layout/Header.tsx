@@ -37,12 +37,7 @@ const Header = () => {
 
       <View style={style.iconContainer}>
         <Text style={style.coinsText}>200</Text>
-        <FontAwesome5
-          name="coins"
-          size={18}
-          color="yellow"
-          style={style.coins}
-        />
+        <FontAwesome5 name="coins" size={18} color="gold" style={style.coins} />
       </View>
     </View>
   );
