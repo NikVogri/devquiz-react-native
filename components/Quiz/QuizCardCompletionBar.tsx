@@ -5,6 +5,7 @@ import Colors from "../../constants/Colors";
 interface QuizCardCompletionBarProps {
   completedQuestions: number;
   totalQuestions: number;
+  isCompleted: boolean;
 }
 
 const QuizCardCompletionBar = ({
@@ -35,11 +36,7 @@ const QuizCardCompletionBar = ({
           width: `${completionPercentage}%`,
         }}
       >
-        {completionPercentage < 100 ? (
           <Text style={style.text}>{completionPercentage}%</Text>
-        ) : (
-          <Text style={style.text}>Completed</Text>
-        )}
       </View>
     </View>
   );
