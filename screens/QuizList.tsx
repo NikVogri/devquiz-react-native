@@ -36,6 +36,7 @@ export default function QuizList({ navigation }: { navigation: any }) {
         const localQuizData = await getData(dataKey);
         const quizId = Number(dataKey.split("-")[1]) - 1;
         quizList[quizId].completedQuestions = localQuizData.lastCompletedStep;
+        quizList[quizId].completed = localQuizData.completed;
       }
 
       setQuizes(quizList as any);
@@ -65,6 +66,7 @@ export default function QuizList({ navigation }: { navigation: any }) {
             title={quiz.title}
             completedQuestions={quiz.completedQuestions}
             totalQuestions={quiz.totalQuestions}
+            isCompleted={quiz.completed}
             key={quiz.id}
           />
         ))}

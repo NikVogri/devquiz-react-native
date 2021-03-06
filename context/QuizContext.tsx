@@ -32,12 +32,14 @@ export interface Quiz {
   completedQuestions: number;
   totalQuestions: number;
   questionsAndAnswers: QuestionsAndAnswers[];
+  completed: boolean;
 }
 
 interface QuizContextInterface {
   handleAnswer: (answerId: number) => void;
   findQuiz: (quizId: number) => void;
   restartQuiz: () => Promise<void>;
+  completeQuiz: () => Promise<void>;
   quiz: Quiz;
   step: number;
   quizIsFinished: boolean;
@@ -60,6 +62,7 @@ const QuizContext = createContext<QuizContextInterface>({
   handleAnswer: () => {},
   findQuiz: () => {},
   restartQuiz: async () => {},
+  completeQuiz: async () => {},
 });
 
 export const QuizProvider = ({ children }: any) => {
@@ -161,6 +164,22 @@ export const QuizProvider = ({ children }: any) => {
     }
   };
 
+
+  const completeQuiz = async () => {
+    await storeData(`quiz-${quiz.id}`, {
+      quizId: quiz.id,
+      lastCompletedStep: step + 1,
+      correctAnswers,
+      wrongAnswers,
+      completed: true
+    });
+
+    setQuiz((oldQuiz: Quiz) => ({
+      ...oldQuiz,
+      compelted: true
+    }));
+  };
+
   return (
     <QuizContext.Provider
       value={{
@@ -171,6 +190,7 @@ export const QuizProvider = ({ children }: any) => {
         correctAnswers,
         quizIsFinished,
         restartQuiz,
+        completeQuiz,
         step,
       }}
     >

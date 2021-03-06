@@ -5,6 +5,7 @@ export default [
     image: require("../assets/images/quizes/css.png"),
     completedQuestions: 0,
     totalQuestions: 5,
+    completed: false,
     questionsAndAnswers: [
       {
         id: 1,
@@ -129,6 +130,7 @@ export default [
     image: require("../assets/images/quizes/html.png"),
     completedQuestions: 0,
     totalQuestions: 3,
+    completed: false,
     questionsAndAnswers: [
       {
         id: 1,
@@ -206,6 +208,7 @@ export default [
     title: "React For Begginers",
     image: require("../assets/images/quizes/react.png"),
     completedQuestions: 10,
+    completed: false,
     totalQuestions: 10,
   },
   {
@@ -213,6 +216,7 @@ export default [
     title: "Vue For Begginers",
     image: require("../assets/images/quizes/vue.png"),
     completedQuestions: 2,
+    completed: false,
     totalQuestions: 10,
   },
   {
@@ -220,6 +224,7 @@ export default [
     title: "HTTP For Begginers",
     image: require("../assets/images/quizes/https.png"),
     completedQuestions: 3,
+    completed: false,
     totalQuestions: 10,
   },
   {
@@ -227,6 +232,7 @@ export default [
     title: "Javascript For Begginers",
     image: require("../assets/images/quizes/javascript.png"),
     completedQuestions: 5,
+    completed: false,
     totalQuestions: 10,
   },
 ];
