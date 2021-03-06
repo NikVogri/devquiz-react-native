@@ -12,7 +12,7 @@ import RetryQuizButton from "../UI/RetryQuizButton";
 import { Modal } from "../../context/ModalContext";
 
 const QuizComplete = ({ navigation }: { navigation: any }) => {
-  const { correctAnswers, quiz, restartQuiz } = useContext(QuizContext);
+  const { correctAnswers, quiz, restartQuiz, completeQuiz } = useContext(QuizContext);
   const { updateHeartsCount, hearts } = useContext(HeartContext);
   const { pushLocalAward } = useContext(AwardsContext);
   const { openModal } = useContext(ModalContext);
@@ -45,6 +45,7 @@ const QuizComplete = ({ navigation }: { navigation: any }) => {
   };
 
   const handleMarkAsCompleted = async () => {
+    await completeQuiz();
     await pushLocalAward(quiz.id, AwardType.quiz);
     navigation.navigate("QuizList");
   };
