@@ -36,6 +36,7 @@ const QuizCardOverlay = ({ type }: QuizCardOverlayInterface) => {
 			);
 			break;
 		default:
+			icon = null;
 			break;
 	}
 

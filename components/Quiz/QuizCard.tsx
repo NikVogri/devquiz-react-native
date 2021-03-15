@@ -3,7 +3,6 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import QuizCardCompletionBar from "./QuizCardCompletionBar";
-import { FontAwesome5 } from "@expo/vector-icons";
 import QuizCardOverlay, { QuizOverlay } from "./QuizCardOverlay";
 interface QuizCardProps {
 	id: any;
@@ -13,6 +12,7 @@ interface QuizCardProps {
 	totalQuestions: number;
 	navigation: any;
 	isCompleted: boolean;
+	isLocked: boolean;
 }
 
 const QuizCard = ({
@@ -23,6 +23,7 @@ const QuizCard = ({
 	totalQuestions,
 	isCompleted,
 	navigation,
+	isLocked
 }: QuizCardProps) => {
 	return (
 		<View style={style.card}>
@@ -32,6 +33,10 @@ const QuizCard = ({
 				{isCompleted && (
 					<QuizCardOverlay type={QuizOverlay.completed} />
 				)}
+
+				{
+					isLocked && (<QuizCardOverlay type={QuizOverlay.locked} />)
+				}
 
 				{!isCompleted && completedQuestions > 0 && (
 					<QuizCardCompletionBar
