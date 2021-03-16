@@ -233,7 +233,8 @@ export default [
 		completedQuestions: 3,
 		completed: false,
 		totalQuestions: 10,
-		locked: false,
+		locked: true,
+		lockedPrice: 30,
 	},
 	{
 		id: 6,
@@ -242,6 +243,7 @@ export default [
 		completedQuestions: 5,
 		completed: false,
 		totalQuestions: 10,
-		locked: false,
+		locked: true,
+		lockedPrice: 30,
 	},
 ];

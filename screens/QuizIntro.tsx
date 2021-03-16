@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -8,6 +8,11 @@ import QuizContext from "../context/QuizContext";
 import HeartContext from "../context/HeartContext";
 import WatchVideoButton from "../components/UI/WatchVideoButton";
 import RestartQuizButton from "../components/UI/RestartQuizButton";
+import PurchaseQuizButton from "../components/UI/PurchaseQuizButton";
+import CoinContext, { Coins } from "../context/CoinContext";
+import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
+import { showPromptNotification } from "../lib/showNotification";
+import ModalContext, { Modal } from "../context/ModalContext";
 
 export default function QuizIntro({
 	navigation,
@@ -16,10 +21,14 @@ export default function QuizIntro({
 	navigation: any;
 	route: Route;
 }) {
-	const { quiz, findQuiz, step, quizIsFinished, restartQuiz } = useContext(
-		QuizContext
-	);
+	const { quiz, findQuiz, step, restartQuiz } = useContext(QuizContext);
 	const { hearts } = useContext(HeartContext);
+	const { userHasEnoughCoins, updateCoins, coins } = useContext(CoinContext);
+	const { openModal } = useContext(ModalContext);
+
+	const [loading, setLoading] = useState(false);
+
+	const { pushData, getData } = useAsyncLocalStorage();
 
 	useEffect(() => {
 		const quizId = route.params.id;
@@ -28,12 +37,83 @@ export default function QuizIntro({
 		}
 	}, [route.params.id]);
 
+	const handlePurchaseQuiz = async () => {
+		try {
+			setLoading(true);
+			if (!userHasEnoughCoins(quiz.lockedPrice as number)) {
+				openModal(Modal.notEnoughCoins); // display not enough coins modal
+				setLoading(false);
+				return;
+			}
+			const purchasedQuizes: number[] = await getData(`purchased-quizes`);
+			if (
+				!purchasedQuizes?.some((quizId: number) => quizId === quiz.id)
+			) {
+				showPromptNotification({
+					title: `Purchase: ${quiz.title} Quiz`,
+					text: `You're going to pay ${quiz.lockedPrice} coins to unlock this quiz you still have ${coins} coins. Continue?`,
+					cancelable: true,
+					onConfirm: async () => {
+						await pushData(`purchased-quizes`, quiz.id);
+						updateCoins(Coins.purchase_quiz);
+						await findQuiz(route.params.id);
+						setLoading(false);
+					},
+				});
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	if (!quiz) {
 		return (
 			<View style={style.quiz}>
 				<Text>Quiz Not Found</Text>
 			</View>
 		);
+	}
+
+	let button;
+	switch (true) {
+		case quiz.locked:
+			button = (
+				<PurchaseQuizButton
+					onPress={handlePurchaseQuiz}
+					price={quiz.lockedPrice as number}
+					loading={loading}
+				/>
+			);
+			break;
+
+		case hearts > 0 && !quiz.completed && !quiz.locked:
+			button = (
+				<StartQuizButton
+					isStarted={step > 0}
+					startQuiz={() =>
+						navigation.navigate("Quiz", { id: quiz!.id })
+					}
+				/>
+			);
+			break;
+
+		case hearts > 0 && quiz.completed:
+			button = <RestartQuizButton onPress={restartQuiz} />;
+			break;
+		case hearts === 0:
+			/* todo
+          - EXTRACT INTO SEPERATE COMPONENT
+          - ADD LOGIC TO WATCH VIDEO
+        */
+			button = (
+				<WatchVideoButton
+					onPress={() => console.log("show video window")}
+				/>
+			);
+			break;
+
+		default:
+			break;
 	}
 
 	return (
@@ -53,29 +133,7 @@ export default function QuizIntro({
 					commodi eligendi modi quis quia odit assumenda cupiditate
 					itaque.
 				</Text>
-
-				{hearts > 0 && !quiz.completed && (
-					<StartQuizButton
-						isStarted={step > 0}
-						startQuiz={() =>
-							navigation.navigate("Quiz", { id: quiz!.id })
-						}
-					/>
-				)}
-
-				{hearts > 0 && quiz.completed && (
-					<RestartQuizButton onPress={restartQuiz} />
-				)}
-
-				{/* todo
-          - EXTRACT INTO SEPERATE COMPONENT
-          - ADD LOGIC TO WATCH VIDEO
-        */}
-				{hearts === 0 && (
-					<WatchVideoButton
-						onPress={() => console.log("show video window")}
-					/>
-				)}
+				{button}
 			</View>
 		</View>
 	);
