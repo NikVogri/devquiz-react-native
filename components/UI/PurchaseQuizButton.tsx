@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { ActivityIndicator, StyleSheet, Text } from "react-native";
 import BaseButton from "./ButtonBase";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -7,9 +7,14 @@ import { FontAwesome5 } from "@expo/vector-icons";
 interface PurchaseQuizButtonProps {
 	onPress: () => void;
 	price: number;
+	loading?: boolean;
 }
 
-const PurchaseQuizButton = ({ onPress, price }: PurchaseQuizButtonProps) => {
+const PurchaseQuizButton = ({
+	onPress,
+	price,
+	loading,
+}: PurchaseQuizButtonProps) => {
 	return (
 		<BaseButton onPress={onPress} style={style.button}>
 			<Text style={style.text}>
