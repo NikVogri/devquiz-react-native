@@ -22,6 +22,8 @@ export default function Profile() {
   const getAllLocalStorageData = async () => {
     const keys = await getAllDataKeys();
     keys.forEach(async (key: string) => console.log(key, await getData(key)));
+
+    console.log(keys);
   };
 
   const handleDataFlush = async () => {
