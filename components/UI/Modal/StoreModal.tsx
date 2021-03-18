@@ -19,7 +19,6 @@ const StoreModal = ({ closeModal, showModal }: StoreModalProps) => {
     <Modal
       isVisible={showModal}
       onBackButtonPress={closeModal}
-      onDismiss={closeModal}
       onBackdropPress={closeModal}
       style={{ position: "relative" }}
     >

@@ -19,7 +19,6 @@ const NotEnoughCoinsModal = ({
 	const { openModal } = useContext(ModalContext);
 
 	const handleVisitStore = () => {
-		closeModal();
 		openModal(ModalEnum.store);
 	};
 
@@ -27,7 +26,6 @@ const NotEnoughCoinsModal = ({
 		<Modal
 			isVisible={showModal}
 			onBackButtonPress={closeModal}
-			onDismiss={closeModal}
 			onBackdropPress={closeModal}
 		>
 			<View style={style.modalInner}>
