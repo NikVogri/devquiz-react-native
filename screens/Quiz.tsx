@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import QuizCompleted from "../components/Quiz/QuizCompleted";
+import QuizResults from "../components/Quiz/QuizResults";
 import QuizCompletionBar from "../components/Quiz/QuizCompletionBar";
 import QuizStep from "../components/Quiz/QuizStep";
 import Colors from "../constants/Colors";
@@ -33,7 +33,7 @@ export default function Quiz({ navigation }: { navigation: any; route: any }) {
         <QuizCompletionBar />
       </View>
       {!quizIsFinished && <QuizStep />}
-      {quizIsFinished && <QuizCompleted navigation={navigation} />}
+      {quizIsFinished && <QuizResults navigation={navigation} />}
     </View>
   );
 }

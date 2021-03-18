@@ -11,7 +11,7 @@ import RetryQuizButton from "../UI/RetryQuizButton";
 
 import { Modal } from "../../context/ModalContext";
 
-const QuizComplete = ({ navigation }: { navigation: any }) => {
+const QuizResults = ({ navigation }: { navigation: any }) => {
   const { correctAnswers, quiz, restartQuiz, completeQuiz } = useContext(QuizContext);
   const { updateHeartsCount, hearts } = useContext(HeartContext);
   const { pushLocalAward } = useContext(AwardsContext);
@@ -99,4 +99,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default QuizComplete;
+export default QuizResults;

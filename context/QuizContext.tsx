@@ -34,6 +34,7 @@ export interface Quiz {
 	completed: boolean;
 	locked: boolean;
 	lockedPrice?: number;
+	tier: number;
 }
 
 interface QuizContextInterface {
@@ -57,6 +58,7 @@ const QuizContext = createContext<QuizContextInterface>({
 		totalQuestions: 0,
 		completed: false,
 		locked: true,
+		tier: 1,
 	},
 	step: 0,
 	correctAnswers: 0,
