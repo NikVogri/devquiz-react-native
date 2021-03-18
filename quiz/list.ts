@@ -5,6 +5,7 @@ export default [
 		image: require("../assets/images/quizes/css.png"),
 		completedQuestions: 0,
 		totalQuestions: 5,
+		tier: 1,
 		completed: false,
 		locked: false,
 		questionsAndAnswers: [
@@ -132,6 +133,7 @@ export default [
 		image: require("../assets/images/quizes/html.png"),
 		completedQuestions: 0,
 		totalQuestions: 3,
+		tier: 1,
 		completed: false,
 		locked: false,
 		questionsAndAnswers: [
@@ -213,6 +215,7 @@ export default [
 		completedQuestions: 10,
 		completed: false,
 		locked: true,
+		tier: 1,
 		lockedPrice: 30,
 		totalQuestions: 10,
 	},
@@ -224,6 +227,7 @@ export default [
 		completed: false,
 		totalQuestions: 10,
 		locked: true,
+		tier: 1,
 		lockedPrice: 30,
 	},
 	{
@@ -234,6 +238,7 @@ export default [
 		completed: false,
 		totalQuestions: 10,
 		locked: true,
+		tier: 1,
 		lockedPrice: 30,
 	},
 	{
@@ -244,6 +249,7 @@ export default [
 		completed: false,
 		totalQuestions: 10,
 		locked: true,
+		tier: 1,
 		lockedPrice: 30,
 	},
 ];
