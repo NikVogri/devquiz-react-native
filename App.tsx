@@ -8,18 +8,18 @@ import { ModalProvider } from "./context/ModalContext";
 import Navigation from "./navigation";
 
 export default function App() {
-  return (
-    <HeartsProvider>
-      <CoinsProvider>
-        <AwardsProvider>
-          <ModalProvider>
-            <SafeAreaProvider>
-              <Navigation />
-              <StatusBar style="light" />
-            </SafeAreaProvider>
-          </ModalProvider>
-        </AwardsProvider>
-      </CoinsProvider>
-    </HeartsProvider>
-  );
+	return (
+		<HeartsProvider>
+			<CoinsProvider>
+				<AwardsProvider>
+					<ModalProvider>
+						<SafeAreaProvider>
+							<Navigation />
+							<StatusBar style="light" />
+						</SafeAreaProvider>
+					</ModalProvider>
+				</AwardsProvider>
+			</CoinsProvider>
+		</HeartsProvider>
+	);
 }
