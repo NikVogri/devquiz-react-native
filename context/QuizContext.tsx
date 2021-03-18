@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useAsyncLocalStorage } from "../hooks/useAsyncLocalStorage";
 import { useNavigation } from "@react-navigation/native";
 import quizList from "../quiz/list";

@@ -5,7 +5,7 @@ export default [
 		image: require("../assets/images/quizes/css.png"),
 		completedQuestions: 0,
 		totalQuestions: 5,
-		tier: 1,
+		tier: 3,
 		completed: false,
 		locked: false,
 		questionsAndAnswers: [
