@@ -4,6 +4,7 @@ export enum Modal {
 	outOfHearts = "outOfHearts",
 	notEnoughCoins = "notEnoughCoins",
 	store = "store",
+	quizCompleted = "quizCompleted",
 }
 
 interface ModalContextInterface {
