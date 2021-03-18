@@ -5,17 +5,19 @@ import { INITIAL_COIN_AMOUNT } from "../constants/Constants";
 export enum Coins {
 	refill_hearts = 50,
 	purchase_quiz = 30,
+	add = "add",
+	subtract = "subtract",
 }
 
 interface CoinsContextInterface {
 	coins: number;
-	updateCoins: (operation: Coins) => void;
+	updateCoins: (type: Coins, changeAmount?: number) => void;
 	userHasEnoughCoins: (requestedAmount: number) => boolean;
 }
 
 const CoinContext = createContext<CoinsContextInterface>({
 	coins: 200,
-	updateCoins: () => {},
+	updateCoins: (type: Coins, changeAmount: number = 0) => {},
 	userHasEnoughCoins: () => false,
 });
 
@@ -52,28 +54,34 @@ export const CoinsProvider = ({ children }: any) => {
 	 * @description sets a new coins amount (add or remove)
 	 */
 
-	const updateCoins = async (operation: Coins) => {
+	const updateCoins = async (type: Coins, changeAmount: number = 0) => {
 		let newCoinsAmount = 0;
+		if (type in Coins) {
+			switch (type) {
+				case Coins.refill_hearts:
+					newCoinsAmount = coins - Coins.refill_hearts;
+					break;
+				case Coins.purchase_quiz:
+					newCoinsAmount = coins - Coins.purchase_quiz;
+					break;
+				case Coins.add:
+					newCoinsAmount = coins + changeAmount;
+					break;
+				case Coins.subtract:
+					newCoinsAmount = coins - changeAmount;
+					break;
+				default:
+					return;
+			}
 
-		switch (operation) {
-			case Coins.refill_hearts:
-				newCoinsAmount = coins - Coins.refill_hearts;
-				break;
-			case Coins.purchase_quiz:
-				newCoinsAmount = coins - Coins.purchase_quiz;
-				break;
+			if (newCoinsAmount < 0) return;
 
-			default:
-				return;
-		}
-
-		if (newCoinsAmount < 0) return;
-
-		try {
-			await storeData("coins", newCoinsAmount);
-			setCoins(newCoinsAmount);
-		} catch (err) {
-			console.log(err);
+			try {
+				await storeData("coins", newCoinsAmount);
+				setCoins(newCoinsAmount);
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	};
 

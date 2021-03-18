@@ -3,6 +3,7 @@ import { View } from "react-native";
 import ModalContext, { Modal } from "../../context/ModalContext";
 import NotEnoughCoinsModal from "../UI/Modal/NotEnoughCoins";
 import OutOfHeartsModal from "../UI/Modal/OutOfHeartsModal";
+import QuizCompletedModal from "../UI/Modal/QuizCompletedModal";
 import StoreModal from "../UI/Modal/StoreModal";
 import Header from "./Header";
 
@@ -24,6 +25,12 @@ const Main = ({ children, ...props }: { children: any }) => {
 			)}
 			{modal === Modal.notEnoughCoins && (
 				<NotEnoughCoinsModal
+					closeModal={closeModal}
+					showModal={showModal}
+				/>
+			)}
+			{modal === Modal.quizCompleted && (
+				<QuizCompletedModal
 					closeModal={closeModal}
 					showModal={showModal}
 				/>
