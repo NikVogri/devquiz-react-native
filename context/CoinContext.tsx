@@ -11,13 +11,13 @@ export enum Coins {
 
 interface CoinsContextInterface {
 	coins: number;
-	updateCoins: (type: Coins, changeAmount?: number) => void;
+	updateCoins: (type: Coins, changeAmount?: number) => Promise<void>;
 	userHasEnoughCoins: (requestedAmount: number) => boolean;
 }
 
 const CoinContext = createContext<CoinsContextInterface>({
 	coins: 200,
-	updateCoins: (type: Coins, changeAmount: number = 0) => {},
+	updateCoins: async (type: Coins, changeAmount: number = 0) => {},
 	userHasEnoughCoins: () => false,
 });
 
