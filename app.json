@@ -25,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/devquiz_logo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "devquiz.apk"
     },
     "web": {
       "favicon": "./assets/images/devquiz_logo.png"

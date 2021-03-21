@@ -1,6 +1,5 @@
-import { AWARD_MULTIPLICATOR, MAX_AWARD } from "../constants/Constants";
+import { AWARD_MULTIPLICATOR } from "../constants/Constants";
 
-export const calcQuizCompletedAward = (quizTier: number): number => {
-	const calculatedAward = Math.round((AWARD_MULTIPLICATOR * quizTier) / 1.5);
-	return calculatedAward > MAX_AWARD ? 60 : calculatedAward;
+export const calcQuizCompletedAward = (quizTier: number, questionsCount: number): number => {
+	return Math.ceil(Math.round((AWARD_MULTIPLICATOR * quizTier + (questionsCount * 1.5)) / 1.5) / 10) * 10;
 };
