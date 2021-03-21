@@ -21,7 +21,10 @@ const QuizCompletedModal = ({
 	const { updateCoins } = useContext(CoinContext);
 
 	const handleClaimCoins = () => {
-		const quizCompletedAward = calcQuizCompletedAward(quiz.tier);
+		const quizCompletedAward = calcQuizCompletedAward(
+			quiz.tier,
+			quiz.questionsAndAnswers.length
+		);
 		updateCoins(Coins.add, quizCompletedAward);
 		closeModal();
 	};
@@ -44,13 +47,17 @@ const QuizCompletedModal = ({
 				/>
 
 				<Text style={style.title}>
-					You've been awarded {calcQuizCompletedAward(quiz.tier)}{" "}
+					You've been awarded{" "}
+					{calcQuizCompletedAward(
+						quiz.tier,
+						quiz.questionsAndAnswers.length
+					)}{" "}
 					<FontAwesome5
-					name="coins"
-					size={18}
-					color="gold"
-					style={style.coins}
-				/>
+						name="coins"
+						size={18}
+						color="gold"
+						style={style.coins}
+					/>
 				</Text>
 
 				<ButtonBase onPress={handleClaimCoins} style={style.btn}>
