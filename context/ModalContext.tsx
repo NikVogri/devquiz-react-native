@@ -26,6 +26,7 @@ export const ModalProvider = ({ children }: any) => {
 	const [showModal, setShowModal] = useState(true);
 
 	const openModal = (type: Modal) => {
+		closeModal();
 		setModal(type);
 		setShowModal(true);
 	};
