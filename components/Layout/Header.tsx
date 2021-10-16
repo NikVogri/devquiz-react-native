@@ -74,7 +74,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     zIndex: 99,
-    paddingTop: 30,
+    paddingTop: 45,
     paddingLeft: 10,
     paddingRight: 10,
     ...Colors.shadow,

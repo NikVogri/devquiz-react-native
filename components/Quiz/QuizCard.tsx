@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Colors from "../../constants/Colors";
 import QuizCardCompletionBar from "./QuizCardCompletionBar";
@@ -23,20 +23,15 @@ const QuizCard = ({
 	totalQuestions,
 	isCompleted,
 	navigation,
-	isLocked
+	isLocked,
 }: QuizCardProps) => {
+	console.log(Dimensions.get("window").width);
 	return (
 		<View style={style.card}>
-			<TouchableWithoutFeedback
-				onPress={() => navigation.navigate("QuizIntro", { id })}
-			>
-				{isCompleted && (
-					<QuizCardOverlay type={QuizOverlay.completed} />
-				)}
+			<TouchableWithoutFeedback onPress={() => navigation.navigate("QuizIntro", { id })}>
+				{isCompleted && <QuizCardOverlay type={QuizOverlay.completed} />}
 
-				{
-					isLocked && (<QuizCardOverlay type={QuizOverlay.locked} />)
-				}
+				{isLocked && <QuizCardOverlay type={QuizOverlay.locked} />}
 
 				{!isCompleted && completedQuestions > 0 && (
 					<QuizCardCompletionBar
@@ -59,7 +54,7 @@ const style = StyleSheet.create({
 	card: {
 		backgroundColor: Colors.backgroundPrimary,
 		borderRadius: 10,
-		width: 150,
+		width: Dimensions.get("window").width <= 375 ? 150 : "45%",
 
 		// maxHeight: 180,
 		margin: 10,
