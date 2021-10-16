@@ -1,35 +1,34 @@
 {
-  "expo": {
-    "name": "devquiz",
-    "slug": "devquiz",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/devquiz_logo.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/devquiz_logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/devquiz_logo.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "devquiz.apk"
-    },
-    "web": {
-      "favicon": "./assets/images/devquiz_logo.png"
-    }
-  }
+	"expo": {
+		"name": "devquiz",
+		"slug": "devquiz",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/images/devquiz_logo.png",
+		"scheme": "myapp",
+		"userInterfaceStyle": "automatic",
+		"splash": {
+			"image": "./assets/images/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#1F1F1F"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "devquiz.apk"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/images/devquiz_logo.png",
+				"backgroundColor": "#1F1F1F"
+			},
+			"package": "devquiz.apk"
+		},
+		"web": {
+			"favicon": "./assets/images/devquiz_logo.png"
+		}
+	}
 }
